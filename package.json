@@ -24,6 +24,10 @@
     "test": "concurrently \"npm:lint\" \"npm:test:*\" --names \"lint,test:\"",
     "test:ember": "ember test"
   },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.38.4",
+    "ember-simple-auth": "^6.0.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.23.2",
     "@babel/eslint-parser": "^7.22.15",
@@ -45,6 +49,7 @@
     "ember-cli-inject-live-reload": "^2.1.0",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-terser": "^4.0.2",
+    "ember-css-modules": "^2.0.1",
     "ember-data": "~5.3.0",
     "ember-fetch": "^8.1.2",
     "ember-load-initializers": "^2.1.2",

@@ -1,0 +1,12 @@
+{{page-title @model.profile.name " " @model.profile.surname}}
+
+<div class="container" local-class="container">
+  <Profile::Card
+    @width="100%"
+    @profile={{@model.profile}}
+    @location={{@model.location}}
+    @focusAreas={{@model.focusAreas}}
+    @modalities={{@model.modalities}}
+    @socialMedia={{@model.socialMedia}}
+  />
+</div>

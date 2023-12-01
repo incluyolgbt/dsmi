@@ -1,0 +1,101 @@
+<div
+  class="card"
+  local-class="{{(this.getCardClass @profile.profilePicture)}}"
+  style="width: {{@width}}"
+>
+
+  {{#if @profile.profilePicture}}
+    <img
+      src="{{@profile.profilePicture}}"
+      alt="..."
+      local-class="profile-picture"
+    />
+  {{/if}}
+
+  <div
+    class="card-body"
+    local-class="{{(this.getCardBodyClass @profile.profilePicture)}}"
+  >
+    <div class="container">
+
+      <h1 class="card-title">
+        {{@profile.name}}
+        {{#if @profile.surname}}
+          {{@profile.surname}}
+        {{/if}}
+        {{#if @profile.pronouns}}
+          <i>({{@profile.pronouns}})</i>
+        {{/if}}
+      </h1>
+
+      <div local-class="social-media">
+        <Profile::SocialMedia @socialMedia={{@socialMedia}} />
+      </div>
+
+      <div class="row" local-class="content-row">
+        <div class="col-sm-5">
+          <h3>Acerca de {{@profile.name}}</h3>
+          <b>📍 Ubicación:</b>
+          <p>{{@location.city}}, {{@location.country}}</p>
+          <b>🔍 Enfoque:</b>
+          <ul>
+            {{#each @focusAreas as |item|}}
+              <li local-class="tag">{{item.name}}</li>
+            {{/each}}
+          </ul>
+          <b>🤝 Oferta:</b>
+          <ul>
+            {{#each @modalities as |item|}}
+              <li>
+                {{item.name}}
+                -
+                {{#if (this.comparePriceRange item.priceMin item.priceMax)}}
+                  ${{item.priceMin}}
+                {{else}}
+                  ${{item.priceMin}}-{{item.priceMax}}
+                {{/if}}
+                MXN
+              </li>
+            {{/each}}
+          </ul>
+          <b>💡 Modalidades:</b>
+          <ul>
+            {{#each @profile.modalities as |item|}}
+              <li>{{item}}</li>
+            {{/each}}
+          </ul>
+          <b>✅ Cédula Profesional:</b>
+          <p>{{@profile.governmentID}}</p>
+          <b>🏳️‍🌈 Relación con la comunidad:</b>
+          {{#if @profile.communityAffiliation}}
+            <p>Se identifica cómo LGBTQ+</p>
+          {{else}}
+            <p>Se identifica cómo aliade</p>
+          {{/if}}
+        </div>
+
+        <div class="col-sm-7">
+          <h3>Semblanza</h3>
+          <p class="card-text">{{@profile.bio}}</p>
+          <b>Contacta a {{@profile.name}}</b>
+          <p>
+            📞
+            {{@profile.phoneNumber}}
+            <br />
+            📬
+            {{@profile.email}}
+            <br />
+            {{#if @profile.whatsApp}}
+              💬
+              <a href="https://wa.me/{{@profile.whatsApp}}" target="_blank">
+                WhatsApp
+              </a>
+            {{/if}}
+
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

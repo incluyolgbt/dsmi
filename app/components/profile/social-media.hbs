@@ -1,0 +1,21 @@
+{{#each @socialMedia as |account|}}
+  <a href="{{account.url}}" target="_blank">
+
+    {{#if (this.renderFacebook @socialMedia)}}
+      <Ui::SocialMedia::Facebook />
+    {{/if}}
+
+    {{#if (this.renderInstagram @socialMedia)}}
+      <Ui::SocialMedia::Instagram />
+    {{/if}}
+
+    {{#if (this.renderTiktok @socialMedia)}}
+      <Ui::SocialMedia::Tiktok />
+    {{/if}}
+
+    {{#if (this.renderTwitter @socialMedia)}}
+      <Ui::SocialMedia::Twitter />
+    {{/if}}
+
+  </a>
+{{/each}}

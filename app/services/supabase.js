@@ -34,14 +34,22 @@ export default class SupabaseService extends Service {
     });
   }
 
-  query(modelName, query) {
+  query(modelName, query, options) {
     return new Promise(async (resolve, reject) => {
-      const [column, value] = Object.entries(query).pop();
+      let resp;
 
-      const { data, error } = await this.supabase
-        .from(modelName)
-        .select()
-        .eq(column, value);
+      if (query.query) {
+        const [column, value] = Object.entries(query.query).pop();
+        resp = await this.supabase.from(modelName).select().eq(column, value);
+      } else if (query.range) {
+        resp = await this.supabase
+          .from(modelName)
+          .select()
+          .order('id', { ascending: true })
+          .range(query.range[0], query.range[1]);
+      }
+
+      const { data, error } = resp;
 
       if (!error) {
         resolve(data);

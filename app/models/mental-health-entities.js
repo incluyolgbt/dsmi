@@ -6,6 +6,7 @@ export default class MentalHealthEntitiesModel extends Model {
   @attr('string') email;
   @attr('string') phoneNumber;
   @attr('string') whatsApp;
+  @attr('string') entityType;
   @attr('string') bio;
   @attr('string') location;
   @attr('boolean') communityAffiliation;

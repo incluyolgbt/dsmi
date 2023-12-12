@@ -4,6 +4,9 @@
   margin: auto;
   display: block;
   translate: 0 -80px;
+  padding: 5px;
+  border: 1px dotted #ddd;
+  background-color: #fff;
 }
 
 .card-body {
@@ -27,7 +30,6 @@
   margin-top: 60px;
 }
 
-
-h1 {
+.card-title {
   text-align: center;
 }

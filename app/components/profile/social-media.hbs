@@ -1,19 +1,21 @@
 {{#each @socialMedia as |account|}}
-  <a href="{{account.url}}" target="_blank">
+  <a
+    href="{{account.url}}"
+    target="_blank"
+    rel="noopener noreferrer"
+    local-class="social-media-icon"
+  >
 
-    {{#if (this.renderFacebook @socialMedia)}}
+    {{#if (this.renderSocialMediaIcon account "Facebook")}}
       <Ui::SocialMedia::Facebook />
-    {{/if}}
 
-    {{#if (this.renderInstagram @socialMedia)}}
+    {{else if (this.renderSocialMediaIcon account "Instagram")}}
       <Ui::SocialMedia::Instagram />
-    {{/if}}
 
-    {{#if (this.renderTiktok @socialMedia)}}
+    {{else if (this.renderSocialMediaIcon account "Tiktok")}}
       <Ui::SocialMedia::Tiktok />
-    {{/if}}
 
-    {{#if (this.renderTwitter @socialMedia)}}
+    {{else if (this.renderSocialMediaIcon account "Twitter")}}
       <Ui::SocialMedia::Twitter />
     {{/if}}
 

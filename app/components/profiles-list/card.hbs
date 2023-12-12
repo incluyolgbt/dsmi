@@ -1,7 +1,48 @@
-<div class="card" local-class="card">
-  <div class="card-body" local-class="card-body">
-    <LinkTo @route="profile" @model="{{@profile.id}}">
-      <h1>Name {{@profile.name}}</h1>
-    </LinkTo>
+<LinkTo @route="profile" @model={{@profile.id}}>
+  <div class="test-inner" local-class="profile-card">
+    <div class="test-author-thumb d-flex">
+
+      {{#if @profile.profilePicture}}
+        <img
+          src="{{@profile.profilePicture}}"
+          alt="{{@profile.name}} {{@profile.surname}}"
+          class="img-fluid"
+        />
+      {{else}}
+        <img
+          src={{this.genericProfilePicture}}
+          alt="Generic profile picture"
+          class="img-fluid"
+        />
+      {{/if}}
+
+      <div class="test-author-info" local-class="profile-info">
+        <h4>{{@profile.name}} {{@profile.surname}}</h4>
+        <h6>{{@profile.entityType}}</h6>
+        <p>📍 {{this.getLocationName @profile.location}}</p>
+        <p>💡
+          {{#each @profile.modalities as |item|}}
+            {{#if (has-next item @profile.modalities)}}
+              {{item}}
+              /
+            {{else}}
+              {{item}}
+            {{/if}}
+          {{/each}}
+        </p>
+      </div>
+    </div>
+
+    <div local-class="right-align">
+      <button
+        class="btn btn-primary btn-circled"
+        local-class="profile-button"
+        type="button"
+      >
+        Ver perfil completo
+      </button>
+    </div>
+
+    <i class="fa fa-quote-right"></i>
   </div>
-</div>
+</LinkTo>

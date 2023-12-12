@@ -1,8 +1,16 @@
 {{page-title "Profiles"}}
-<div class="container" style="margin-top: 140px;">
-  {{#each @model as |profile|}}
-    <div id="{{profile.id}}">
-      <ProfilesList::Card @profile="{{profile}}" />
-    </div>
-  {{/each}}
+<div class="container" local-class="cards-container">
+  <div class="row gx-3">
+    {{#each @model.profiles as |profile|}}
+      <div id="{{profile.id}}" class="col-md-6">
+        <ProfilesList::Card @profile={{profile}} />
+      </div>
+    {{/each}}
+  </div>
+  <ProfilesList::Pagination
+    @currentPage={{this.page}}
+    @resultsInPage={{@model.profiles.length}}
+    @prevPage={{this.prevPage}}
+    @nextPage={{this.nextPage}}
+  />
 </div>

@@ -7,6 +7,7 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function () {
-  this.route('profiles');
+  this.route('profiles', { path: '/profiles' });
   this.route('profile', { path: '/profile/:mentalHealthEntity_id' });
+  this.route('not-found', { path: '/*path' });
 });

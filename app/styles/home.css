@@ -1,0 +1,30 @@
+.container {
+  margin-top: 100px;
+}
+
+.intro {
+  font-weight: bold;
+}
+
+.sub-intro {
+  font-weight: 600;
+  padding-bottom: 30px;
+}
+
+.cards-section {
+  padding-top: 30px;
+}
+
+.cards-container a {
+  text-decoration: none;
+}
+
+.center-align {
+  text-align: center;
+}
+
+@media (width <= 991px) {
+  .container {
+    padding: 0 20px;
+  }
+}

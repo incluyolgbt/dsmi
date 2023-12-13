@@ -47,26 +47,23 @@
   display: none;
 }
 
-@media (max-width:991px) {
+@media (width <= 991px) {
   .nav-btn {
     display: inline;
   }
 
   .nav > .nav-links {
-    height: 0px;
+    height: 0;
     overflow-y: hidden;
     transition: all 0.3s ease-in;
   }
 
   .nav > .nav-check:not(:checked) ~ .nav-links {
-    height: 0px;
+    height: 0;
   }
 
   .nav > .nav-check:checked ~ .nav-links {
-    height: 50px;
+    height: 130px;
     overflow-y: auto;
   }
 }
-
-
-

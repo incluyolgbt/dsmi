@@ -81,12 +81,17 @@
       <div class="navbar-collapse bg-black" local-class="nav-links">
         <ul class="navbar-nav">
           <li class="nav-item" {{on "click" this.toggleBackMenu}}>
-            <LinkTo @route="application" class="nav-link js-scroll-trigger">
+            <LinkTo @route="application" class="nav-link">
               Inicio
             </LinkTo>
           </li>
           <li class="nav-item" {{on "click" this.toggleBackMenu}}>
-            <LinkTo @route="profiles" class="nav-link js-scroll-trigger">
+            <LinkTo @route="about" class="nav-link">
+              ¿Quiénes somos?
+            </LinkTo>
+          </li>
+          <li class="nav-item" {{on "click" this.toggleBackMenu}}>
+            <LinkTo @route="profiles" class="nav-link">
               Directorio
             </LinkTo>
           </li>

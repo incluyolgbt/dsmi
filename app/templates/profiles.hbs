@@ -1,5 +1,10 @@
-{{page-title "Profiles"}}
-<div class="container" local-class="cards-container">
+{{page-title "Directorio"}}
+
+<div
+  class="container"
+  local-class="cards-container"
+  {{did-insert this.scrollToTop}}
+>
   <div class="row gx-3">
     {{#each @model.profiles as |profile|}}
       <div id="{{profile.id}}" class="col-md-6">

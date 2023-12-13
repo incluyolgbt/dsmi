@@ -10,6 +10,9 @@ export default class ProfilesRoute extends Route {
     page: {
       refreshModel: true,
     },
+    scroll: {
+      refreshModel: true,
+    },
   };
 
   async model(params) {

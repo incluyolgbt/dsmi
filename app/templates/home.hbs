@@ -1,0 +1,51 @@
+<div class="container" local-class="container">
+
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-7 text-lg-left">
+      <h1 class="display-4 mb-4" local-class="intro">
+        Tu camino por una mejor salud mental comienza aquí.
+      </h1>
+      <p class="lead mb-4" local-class="sub-intro">
+        Encuentra profesionistas de la salud mental hispanoablantes y con
+        perspectiva LGBTQ+ en un sólo lugar.
+      </p>
+    </div>
+
+    <div class="col-lg-5 d-none d-lg-block">
+      <div class="banner-img-block">
+        <img
+          src="/img/experto-salud-mental.png"
+          alt="banner-img"
+          class="img-fluid"
+        />
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<section class="section bg-grey" local-class="cards-section">
+  <div class="container" local-class="cards-container">
+
+    <h3 class="mb-4 font-weight-bold">
+      Perfiles destacados
+    </h3>
+
+    <div class="row gx-3">
+      {{#each @model.profiles as |profile|}}
+        <div id="{{profile.id}}" class="col-md-6">
+          <ProfilesList::Card @profile={{profile}} />
+        </div>
+      {{/each}}
+    </div>
+
+    <div local-class="center-align">
+      <LinkTo @route="profiles" @query={{hash scroll="true"}}>
+        <button class="btn btn-primary btn-circled" type="button">
+          Ver más perfiles
+        </button>
+      </LinkTo>
+    </div>
+
+  </div>
+</section>

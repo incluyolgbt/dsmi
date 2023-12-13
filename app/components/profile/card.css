@@ -1,0 +1,35 @@
+.profile-picture {
+  width: 150px;
+  border-radius: 50%;
+  margin: auto;
+  display: block;
+  translate: 0 -80px;
+  padding: 5px;
+  border: 1px dotted #ddd;
+  background-color: #fff;
+}
+
+.card-body {
+  translate: 0 -80px;
+  margin-bottom: -75px;
+}
+
+.content-row {
+  translate: 0 20px;
+}
+
+.social-media {
+  text-align: center;
+}
+
+.card {
+  margin-top: 140px;
+}
+
+.card-no-image {
+  margin-top: 60px;
+}
+
+.card-title {
+  text-align: center;
+}

@@ -18,11 +18,13 @@ module.exports = function (environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
+
+    SUPABASEURL: process.env.SUPABASEURL,
+    SUPABASETOKEN: process.env.SUPABASETOKEN,
   };
 
   if (environment === 'development') {
-    // ENV.SUPABASEURL = ''
-    // ENV.SUPABASETOKEN = ''
+    //
   }
 
   if (environment === 'test') {
@@ -38,7 +40,7 @@ module.exports = function (environment) {
   }
 
   if (environment === 'production') {
-    // here you can enable a production-specific feature
+    //
   }
 
   return ENV;

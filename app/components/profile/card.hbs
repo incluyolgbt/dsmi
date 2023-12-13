@@ -47,9 +47,8 @@
           <ul>
             {{#each @appointmentTypes as |item|}}
               <li>
-                {{item.name}}
-                -
-                {{#if (this.comparePriceRange item.priceMin item.priceMax)}}
+                {{item.name}}:
+                {{#if (eq item.priceMin item.priceMax)}}
                   ${{item.priceMin}}
                 {{else}}
                   ${{item.priceMin}}-{{item.priceMax}}

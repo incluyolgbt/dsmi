@@ -7,8 +7,8 @@ export default class ProfilesController extends Controller {
   @service router;
 
   queryParams = ['page', 'scroll'];
-  page = 1;
 
+  @tracked page = 1;
   @tracked scroll;
 
   @action
@@ -25,11 +25,9 @@ export default class ProfilesController extends Controller {
 
   @action
   scrollToTop() {
-    if (this.scroll) {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      });
-    }
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   }
 }

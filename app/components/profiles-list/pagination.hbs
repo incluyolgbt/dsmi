@@ -1,12 +1,20 @@
-<div>
+<div local-class="pagination">
   {{#if (not-eq @currentPage 1)}}
-    <button class="btn btn-primary btn-circled" type="button" {{on "click" @prevPage}}>
+    <button
+      class="btn btn-primary btn-circled"
+      type="button"
+      {{on "click" @prevPage}}
+    >
       Anterior
     </button>
   {{/if}}
 
-  {{#if (eq @resultsInPage 2)}}
-    <button class="btn btn-primary btn-circled" type="button" {{on "click" @nextPage}}>
+  {{#if (eq @resultsInPage 10)}}
+    <button
+      class="btn btn-primary btn-circled"
+      type="button"
+      {{on "click" @nextPage}}
+    >
       Siguiente
     </button>
   {{/if}}

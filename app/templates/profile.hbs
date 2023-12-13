@@ -1,6 +1,11 @@
 {{page-title @model.profile.name " " @model.profile.surname}}
 
-<div class="container" local-class="container" {{did-insert this.scrollToTop}}>
+<div
+  class="container"
+  local-class="container"
+  {{did-insert this.scrollToTop}}
+  {{did-update this.scrollToTop @model.profile.id}}
+>
   <Profile::Card
     @width="100%"
     @profile={{@model.profile}}

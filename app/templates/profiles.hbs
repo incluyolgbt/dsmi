@@ -4,6 +4,7 @@
   class="container"
   local-class="cards-container"
   {{did-insert this.scrollToTop}}
+  {{did-update this.scrollToTop this.page}}
 >
   <div class="row gx-3">
     {{#each @model.profiles as |profile|}}

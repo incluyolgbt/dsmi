@@ -33,7 +33,7 @@ export default class ProfilesRoute extends Route {
     });
 
     if (!res.profiles.length) {
-      this.router.transitionTo('not-found');
+      this.router.transitionTo('not-found', 'not-found');
     }
 
     return { ...res };

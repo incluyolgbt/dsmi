@@ -16,10 +16,6 @@ export default class HomeRoute extends Route {
       locations: this.store.findAll('locations'),
     });
 
-    if (!res.profiles.length) {
-      this.router.transitionTo('not-found');
-    }
-
     return { ...res };
   }
 }

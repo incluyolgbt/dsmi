@@ -19,9 +19,9 @@
     <div class="container">
 
       <h1 class="card-title" local-class="card-title">
-        {{@profile.name}}
-        {{#if @profile.surname}}
-          {{@profile.surname}}
+        {{@profile.firstName}}
+        {{#if @profile.lastName}}
+          {{@profile.lastName}}
         {{/if}}
         {{#if @profile.pronouns}}
           <i>({{@profile.pronouns}})</i>
@@ -45,7 +45,7 @@
           </ul>
           <b>🤝 Oferta:</b>
           <ul>
-            {{#each @modalities as |item|}}
+            {{#each @appointmentTypes as |item|}}
               <li>
                 {{item.name}}
                 -

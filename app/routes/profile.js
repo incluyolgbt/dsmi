@@ -20,7 +20,7 @@ export default class ProfileRoute extends Route {
     }
 
     const res = await RSVP.hash({
-      modalities: this.store.query('modalities', {
+      appointmentTypes: this.store.query('appointment-types', {
         query: {
           mentalHealthEntityId: profileId,
         },

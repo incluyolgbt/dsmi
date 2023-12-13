@@ -1,8 +1,8 @@
 import Model, { attr } from '@ember-data/model';
 
 export default class MentalHealthEntitiesModel extends Model {
-  @attr('string') name;
-  @attr('string') surname;
+  @attr('string') firstName;
+  @attr('string') lastName;
   @attr('string') email;
   @attr('string') phoneNumber;
   @attr('string') whatsApp;

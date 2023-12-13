@@ -1,13 +1,6 @@
 import Component from '@glimmer/component';
 
 export default class ProfileCardComponent extends Component {
-  comparePriceRange(priceMin, priceMax) {
-    if (priceMin === priceMax) {
-      return true;
-    }
-    return false;
-  }
-
   getCardClass(url) {
     if (url) {
       return 'card';

@@ -1,4 +1,4 @@
-{{page-title @model.profile.name " " @model.profile.surname}}
+{{page-title @model.profile.firstName " " @model.profile.lastName}}
 
 <div
   class="container"
@@ -11,7 +11,7 @@
     @profile={{@model.profile}}
     @location={{@model.location}}
     @focusAreas={{@model.focusAreas}}
-    @modalities={{@model.modalities}}
+    @appointmentTypes={{@model.appointmentTypes}}
     @socialMedia={{@model.socialMedia}}
   />
 </div>

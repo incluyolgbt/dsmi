@@ -3,8 +3,13 @@ import { createClient } from '@supabase/supabase-js';
 import ENV from 'dsmi/config/environment';
 
 export default class SupabaseService extends Service {
+  supabaseClient = null;
+
   get supabase() {
-    return createClient(ENV.SUPABASEURL, ENV.SUPABASETOKEN);
+    if (!this.supabaseClient) {
+      this.supabaseClient = createClient(ENV.SUPABASEURL, ENV.SUPABASETOKEN);
+    }
+    return this.supabaseClient;
   }
 
   findAll(modelName) {

@@ -5,7 +5,7 @@
       {{#if @profile.profilePicture}}
         <img
           src="{{@profile.profilePicture}}"
-          alt="{{@profile.name}} {{@profile.surname}}"
+          alt="{{@profile.firstName}} {{@profile.lastName}}"
           class="img-fluid"
         />
       {{else}}
@@ -17,7 +17,7 @@
       {{/if}}
 
       <div class="test-author-info" local-class="profile-info">
-        <h4>{{@profile.name}} {{@profile.surname}}</h4>
+        <h4>{{@profile.firstName}} {{@profile.lastName}}</h4>
         <h6>{{@profile.entityType}}</h6>
         <p>📍 {{this.getLocationName @profile.location}}</p>
         <p>💡

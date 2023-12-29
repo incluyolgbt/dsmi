@@ -9,7 +9,7 @@
     </button>
   {{/if}}
 
-  {{#if (eq @resultsInPage 10)}}
+  {{#if (not-eq @currentPage (this.totalPages @profileCount))}}
     <button
       class="btn btn-primary btn-circled"
       type="button"

@@ -14,8 +14,8 @@
     {{/each}}
   </div>
   <ProfilesList::Pagination
+    @profileCount={{@model.profileCount}}
     @currentPage={{this.page}}
-    @resultsInPage={{@model.profiles.length}}
     @prevPage={{this.prevPage}}
     @nextPage={{this.nextPage}}
   />

@@ -63,8 +63,10 @@
               <li>{{item}}</li>
             {{/each}}
           </ul>
-          <b>✅ Cédula Profesional:</b>
-          <p>{{@profile.governmentID}}</p>
+          {{#if @profile.governmentID}}
+            <b>✅ Cédula Profesional:</b>
+            <p>{{@profile.governmentID}}</p>
+          {{/if}}
           <b>🏳️‍🌈 Relación con la comunidad:</b>
           {{#if @profile.communityAffiliation}}
             <p>Se identifica cómo LGBTQ+</p>

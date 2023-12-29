@@ -5,6 +5,7 @@ import RSVP from 'rsvp';
 export default class ProfilesRoute extends Route {
   @service store;
   @service router;
+  @service supabase;
 
   queryParams = {
     page: {
@@ -14,6 +15,10 @@ export default class ProfilesRoute extends Route {
       refreshModel: true,
     },
   };
+
+  async getProfilesCount() {
+    return await this.supabase.rpc('getProfilesCount');
+  }
 
   async model(params) {
     let range = [];
@@ -30,6 +35,7 @@ export default class ProfilesRoute extends Route {
         range,
       }),
       locations: this.store.findAll('locations'),
+      profileCount: this.getProfilesCount()
     });
 
     if (!res.profiles.length) {

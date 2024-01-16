@@ -218,8 +218,8 @@ img {
 .bg-primary,
 .btn-primary,
 .btn-white:hover {
-  background: #21c87a !important;
-  border-color: #21c87a !important;
+  background: #8250ce !important;
+  border-color: #8250ce !important;
   color: #fff;
 }
 
@@ -273,11 +273,11 @@ img {
 }
 
 .bg-primary {
-  background: #21c87a !important;
+  background: #8250ce !important;
 }
 
 a {
-  color: #21c87a;
+  color: #8250ce;
 }
 
 a:hover,
@@ -299,7 +299,7 @@ a:focus {
 }
 
 .header-socials li a {
-  color: #21c87a;
+  color: #8250ce;
 }
 
 /* -----------------
@@ -320,7 +320,7 @@ a:focus {
 
 .icon-block {
   margin-right: 20px;
-  color: #21c87a;
+  color: #8250ce;
   font-size: 40px;
   line-height: 20px;
   font-weight: 400;
@@ -344,7 +344,7 @@ a:focus {
  HOME-3
 --------------------------- */
 .header-white {
-  background: #21c87a;
+  background: #8250ce;
   box-shadow: 0 7px 22px rgb(0 0 0 / 8%);
   border-radius: 0;
 }
@@ -638,7 +638,7 @@ PAGE BANNER
 .dropdown-item:hover {
   color: #fff;
   text-decoration: none;
-  background-color: #21c87a;
+  background-color: #8250ce;
 }
 
 /* ----------------------
@@ -731,7 +731,7 @@ PAGE BANNER
   position: absolute;
   content: "";
   top: -27px;
-  background-color: #21c87a;
+  background-color: #8250ce;
   opacity: 0.3;
   width: 80px;
   right: 70px;
@@ -756,7 +756,7 @@ ABOUT-2
 }
 
 #about .img-block img {
-  border: 5px solid #21c87a;
+  border: 5px solid #8250ce;
 }
 
 .pt-6 {
@@ -771,7 +771,7 @@ ABOUT-2
  SERVICE
 ----------------------- */
 h5.subtitle {
-  color: #21c87a;
+  color: #8250ce;
   margin-bottom: 10px;
   font-weight: 300;
 }
@@ -802,7 +802,7 @@ h5.subtitle {
   font-size: 25px;
   width: 50px;
   height: 50px;
-  background: #21c87a;
+  background: #8250ce;
   text-align: center;
   border-radius: 50%;
   padding-top: 5px;
@@ -870,7 +870,7 @@ h5.subtitle {
 }
 
 .web-service-block:hover i {
-  color: #21c87a;
+  color: #8250ce;
 }
 
 .web-service-block:hover h3 {
@@ -993,7 +993,7 @@ h5.subtitle {
 }
 
 .project-content-block h4 {
-  color: #21c87a;
+  color: #8250ce;
 }
 
 .project-content-block p {
@@ -1031,7 +1031,7 @@ h5.subtitle {
   position: absolute;
   left: 30px;
   top: -23px;
-  background: #21c87a;
+  background: #8250ce;
   color: #fff;
 }
 
@@ -1145,7 +1145,7 @@ h5.subtitle {
   font-family: "Font Awesome 5 Free";
   left: 0;
   top: 5px;
-  color: #21c87a;
+  color: #8250ce;
   font-weight: 900;
 }
 
@@ -1231,7 +1231,7 @@ PRICING-2
 }
 
 .blog-content:hover a h3 {
-  color: #21c87a;
+  color: #8250ce;
 }
 
 .blog-content h6 span {
@@ -1328,12 +1328,12 @@ CONTACT PAGE
   font-size: 40px;
   margin-bottom: 20px;
   display: block;
-  color: #21c87a;
+  color: #8250ce;
 }
 
 .form-control:focus,
 .form-control:hover {
-  border-color: #21c87a;
+  border-color: #8250ce;
   box-shadow: none;
 }
 
@@ -1412,7 +1412,7 @@ CONTACT PAGE
 }
 
 .current-year {
-  color: #21c87a !important;
+  color: #8250ce !important;
 }
 
 /* -----------------------------
@@ -1424,7 +1424,7 @@ CONTACT PAGE
   right: 10px;
   bottom: 15px;
   z-index: 999;
-  background: #21c87a;
+  background: #8250ce;
   color: #fff !important;
   border-radius: 100%;
   opacity: 0;
@@ -1770,7 +1770,7 @@ CONTACT PAGE
 
   .navbar-collapse.collapse.show {
     padding-bottom: 30px;
-    background: #21c87a;
+    background: #8250ce;
   }
 
   #map {
@@ -1810,7 +1810,7 @@ CONTACT PAGE
 
   .navbar-collapse.collapse.show {
     padding-bottom: 30px;
-    background: #21c87a;
+    background: #8250ce;
   }
 
   .top-info-block {
@@ -2122,7 +2122,7 @@ CONTACT PAGE
 
   .navbar-collapse.collapse.show {
     padding-bottom: 30px;
-    background: #21c87a;
+    background: #8250ce;
   }
 
   .web-service-block {

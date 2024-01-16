@@ -5,13 +5,13 @@
       {{#if @profile.profilePicture}}
         <img
           src="{{@profile.profilePicture}}"
-          alt="{{@profile.firstName}} {{@profile.lastName}}"
+          alt="Fotografía de {{@profile.firstName}} {{@profile.lastName}}"
           class="img-fluid"
         />
       {{else}}
         <img
           src={{this.genericProfilePicture}}
-          alt="Generic profile picture"
+          alt="Foto de perfíl genérica"
           class="img-fluid"
         />
       {{/if}}

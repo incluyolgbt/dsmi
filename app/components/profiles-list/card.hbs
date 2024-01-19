@@ -1,4 +1,8 @@
-<LinkTo @route="profile" @model={{@profile.id}}>
+<LinkTo
+  @route="profile"
+  @model={{@profile.id}}
+  data-umami-event="open-profile-button"
+>
   <div class="test-inner" local-class="profile-card">
     <div class="test-author-thumb d-flex">
 

@@ -18,7 +18,7 @@
 
       <div class="test-author-info" local-class="profile-info">
         <h4>{{@profile.firstName}} {{@profile.lastName}}</h4>
-        <h6>{{@profile.entityType}}</h6>
+        <h5 local-class="profile-headline">{{@profile.entityType}}</h5>
         <p>📍 {{this.getLocationName @profile.location}}</p>
         <p>💡
           {{#each @profile.modalities as |item|}}
@@ -30,6 +30,9 @@
             {{/if}}
           {{/each}}
         </p>
+        {{#if @profile.incluyoBadge}}
+          <p>🌈 Equipo Incluyo</p>
+        {{/if}}
       </div>
     </div>
 

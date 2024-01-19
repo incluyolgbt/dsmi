@@ -14,4 +14,5 @@ export default class MentalHealthEntitiesModel extends Model {
   @attr('string') profilePicture;
   @attr('number') governmentID;
   @attr() modalities;
+  @attr('boolean') incluyoBadge;
 }

@@ -78,6 +78,18 @@
         <div class="col-sm-7">
           <h3>Semblanza</h3>
           <p class="card-text">{{@profile.bio}}</p>
+
+          {{#if @profile.incluyoBadge}}
+            <b>🌈 Equipo Incluyo</b>
+            <p>Actualmente,
+              {{@profile.firstName}}
+              forma parte del equipo de trabajo de Incluyo. Todas las personas
+              que forman parte de Incluyo están en constante actualización y
+              sensibilización respecto a los temas más importantes referentes a
+              la diversidad sexogenérica.
+            </p>
+          {{/if}}
+
           <b>Contacta a {{@profile.firstName}}</b>
           <p>
             📞

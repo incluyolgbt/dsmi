@@ -27,6 +27,8 @@
   <meta property="og:image"
     content="https://kkwxkbmjdoravcbyanzd.supabase.co/storage/v1/object/public/resources/ogimage.png" />
 
+  <script src="/scriptloader.js"></script>
+
   {{content-for "head-footer"}}
 </head>
 
@@ -37,14 +39,6 @@
   <script src="{{rootURL}}assets/dsmi.js"></script>
 
   {{content-for "body-footer"}}
-  <script defer>
-    window.addEventListener('load', function () {
-      const script = document.createElement('script');
-      script.src = 'https://us.umami.is/script.js';
-      document.body.appendChild(script);
-    });
-  </script>
-
 </body>
 
 </html>

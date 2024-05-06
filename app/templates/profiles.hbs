@@ -6,17 +6,34 @@
   {{did-insert this.scrollToTop}}
   {{did-update this.scrollToTop this.page}}
 >
+  <ProfilesList::Filters
+    @model={{@model}}
+    @applyFiltersCallback={{this.applyFilters}}
+  />
   <div class="row gx-3">
     {{#each @model.profiles as |profile|}}
       <div id="{{profile.id}}" class="col-md-6">
         <ProfilesList::Card @profile={{profile}} />
       </div>
     {{/each}}
+
+    {{#unless @model.profiles}}
+      <div local-class="warning-message">
+        <h1>🔍🤔</h1>
+        <h2>No se encontraron perfiles con los criterios de búsqueda
+          seleccionados.</h2>
+        <p>Intenta ajustar los filtros o borrarlos para desplegar todos los
+          resultados.</p>
+      </div>
+    {{/unless}}
   </div>
-  <ProfilesList::Pagination
-    @profileCount={{@model.profileCount}}
-    @currentPage={{this.page}}
-    @prevPage={{this.prevPage}}
-    @nextPage={{this.nextPage}}
-  />
+  {{#if @model.profiles}}
+    <ProfilesList::Pagination
+      @profileCount={{@model.profileCount}}
+      @currentPage={{this.page}}
+      @prevPage={{this.prevPage}}
+      @nextPage={{this.nextPage}}
+    />
+  {{/if}}
+
 </div>

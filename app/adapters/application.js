@@ -13,6 +13,14 @@ export default class ApplicationAdapter extends JSONAPIAdapter {
   }
 
   query(store, type, query, recordArray, adapterOptions) {
+    if (adapterOptions?.filters) {
+      return this.supabase.queryBy(
+        type.modelName,
+        query,
+        adapterOptions.filters,
+      );
+    }
+
     return this.supabase.query(type.modelName, query);
   }
 }

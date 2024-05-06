@@ -1,0 +1,15 @@
+<div id="{{@id}}" class="dropdown">
+  <button
+    class="btn dropdown-toggle"
+    local-class="{{@buttonLocalClasses}}"
+    type="button"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+    data-bs-auto-close="outside"
+  >
+    {{@buttonLabel}}
+  </button>
+  <div class="dropdown-menu" local-class="{{@dropdownLocalClasses}}">
+    {{yield}}
+  </div>
+</div>

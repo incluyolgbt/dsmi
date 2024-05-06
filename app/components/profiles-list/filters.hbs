@@ -1,0 +1,340 @@
+<div class="container">
+  <div class="row justify-content-start pb-3" local-class="desktop-filters">
+
+    <div class="col-sm-auto ps-0">
+      <Ui::Dropdowns::FilterDropdown
+        @id="cities-dropdown"
+        @buttonLocalClasses="filter-dropdown"
+        @buttonLabel="Ciudades"
+        @dropdownLocalClasses="dropdown-menu cities-dropdown-menu"
+      >
+        {{#each (sort-by "city" @model.locations) as |location|}}
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value={{location.id}}
+              id="{{location.city}}_{{location.state}}"
+              checked={{this.isLocationSelected location.id}}
+              {{on "input" this.setLocations}}
+            />
+            <label
+              class="form-check-label"
+              for="{{location.city}}_{{location.state}}"
+            >
+              {{location.city}},
+              {{location.state}}
+            </label>
+          </div>
+        {{/each}}
+      </Ui::Dropdowns::FilterDropdown>
+    </div>
+
+    <div class="col-sm-auto ps-0">
+      <Ui::Dropdowns::FilterDropdown
+        @id="modalities-dropdown"
+        @buttonLocalClasses="filter-dropdown"
+        @buttonLabel="Modalidades"
+        @dropdownLocalClasses="dropdown-menu"
+      >
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value="Presencial"
+            id="Presencial"
+            checked={{this.isModalitySelected "Presencial"}}
+            {{on "input" this.setModalities}}
+          />
+          <label class="form-check-label" for="Presencial">
+            Presencial
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value="Virtual"
+            id="Virtual"
+            checked={{this.isModalitySelected "Virtual"}}
+            {{on "input" this.setModalities}}
+          />
+          <label class="form-check-label" for="Virtual">
+            Virtual
+          </label>
+        </div>
+      </Ui::Dropdowns::FilterDropdown>
+    </div>
+
+    <div class="col-sm-auto ps-0">
+      <Ui::Dropdowns::FilterDropdown
+        @id="price-dropdown"
+        @buttonLocalClasses="filter-dropdown"
+        @buttonLabel="Rango de precio"
+        @dropdownLocalClasses="dropdown-menu price-dropdown-menu"
+      >
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="precioMinimo">Desde $</span>
+          <input
+            type="number"
+            class="form-control"
+            aria-label="Sizing example input"
+            aria-describedby="precioMinimo"
+            value="{{this.priceMin}}"
+            min="0"
+            {{on "input" this.setMinPrice}}
+          />
+        </div>
+        <div class="input-group">
+          <span class="input-group-text" id="precioMaximo">Hasta $</span>
+          <input
+            type="number"
+            class="form-control"
+            aria-label="Sizing example input"
+            aria-describedby="precioMaximo"
+            value="{{this.priceMax}}"
+            min="0"
+            {{on "input" this.setMaxPrice}}
+          />
+        </div>
+      </Ui::Dropdowns::FilterDropdown>
+    </div>
+
+    <div class="col-sm-auto ps-0">
+      <button
+        type="button"
+        class="btn btn-primary btn-circled"
+        local-class="filter-controls"
+        {{on "click" (fn this.applyFilters @applyFiltersCallback)}}
+      >Aplicar filtros</button>
+    </div>
+
+    <div class="col-sm-auto ps-0">
+      <button
+        type="button"
+        class="btn btn-secondary btn-circled"
+        local-class="filter-controls"
+        {{on "click" (fn this.resetFilters @applyFiltersCallback)}}
+      >Borrar filtros</button>
+    </div>
+
+  </div>
+
+  <div class="row justify-content-start pb-3" local-class="mobile-filters">
+
+    <div class="col p-1">
+      <button
+        type="button"
+        class="btn btn-primary btn-circled"
+        data-bs-toggle="modal"
+        data-bs-target="#filtersModal"
+        local-class="filter-controls"
+      >
+        Filtrar perfiles
+      </button>
+    </div>
+
+    <div class="col p-1">
+      <button
+        type="button"
+        class="btn btn-secondary btn-circled"
+        local-class="filter-controls"
+        {{on "click" (fn this.resetFilters @applyFiltersCallback)}}
+      >Borrar filtros</button>
+    </div>
+  </div>
+
+  <div
+    class="modal fade"
+    id="filtersModal"
+    tabindex="-1"
+    aria-labelledby="filtersModalLabel"
+    aria-hidden="true"
+  >
+    <div
+      class="modal-dialog modal-fullscreen-lg-down modal-dialog-centered modal-dialog-scrollable"
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="filtersModalLabel">Filtrar perfiles</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Cerrar"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="accordion" id="accordionExample">
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="true"
+                  aria-controls="collapseOne"
+                >
+                  Ciudades
+                </button>
+              </h2>
+              <div
+                id="collapseOne"
+                class="accordion-collapse collapse show"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+
+                  {{#each (sort-by "city" @model.locations) as |location|}}
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value={{location.id}}
+                        id="{{location.city}}_{{location.state}}_mob"
+                        checked={{this.isLocationSelected location.id}}
+                        {{on "input" this.setLocations}}
+                      />
+                      <label
+                        class="form-check-label"
+                        for="{{location.city}}_{{location.state}}_mob"
+                      >
+                        {{location.city}},
+                        {{location.state}}
+                      </label>
+                    </div>
+                  {{/each}}
+
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseTwo"
+                  aria-expanded="false"
+                  aria-controls="collapseTwo"
+                >
+                  Modalidades
+                </button>
+              </h2>
+              <div
+                id="collapseTwo"
+                class="accordion-collapse collapse"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value="Presencial"
+                      id="Presencial_mob"
+                      checked={{this.isModalitySelected "Presencial"}}
+                      {{on "input" this.setModalities}}
+                    />
+                    <label class="form-check-label" for="Presencial_mob">
+                      Presencial
+                    </label>
+                  </div>
+
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value="Virtual"
+                      id="Virtual_mob"
+                      checked={{this.isModalitySelected "Virtual"}}
+                      {{on "input" this.setModalities}}
+                    />
+                    <label class="form-check-label" for="Virtual_mob">
+                      Virtual
+                    </label>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseThree"
+                  aria-expanded="false"
+                  aria-controls="collapseThree"
+                >
+                  Rango de precios
+                </button>
+              </h2>
+              <div
+                id="collapseThree"
+                class="accordion-collapse collapse"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <div local-class="price-range-mob">
+
+                    <div class="input-group">
+                      <span class="input-group-text" id="precioMinimo_mob">Desde
+                        $</span>
+                      <input
+                        type="number"
+                        class="form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="precioMinimo_mob"
+                        value="{{this.priceMin}}"
+                        min="0"
+                        {{on "input" this.setMinPrice}}
+                      />
+                    </div>
+
+                    <div class="input-group">
+                      <span class="input-group-text" id="precioMaximo_mob">Hasta
+                        $</span>
+                      <input
+                        type="number"
+                        class="form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="precioMaximo_mob"
+                        value="{{this.priceMax}}"
+                        min="0"
+                        {{on "input" this.setMaxPrice}}
+                      />
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >Cerrar</button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-dismiss="modal"
+            {{on "click" (fn this.applyFilters @applyFiltersCallback)}}
+          >Aplicar filtros</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

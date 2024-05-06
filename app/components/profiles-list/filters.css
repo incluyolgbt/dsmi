@@ -1,0 +1,71 @@
+.filter-dropdown {
+  border: 1px #6c757d solid;
+  padding: 15px;
+  font-size: 15px;
+  color: #6c757d;
+  font-weight: normal;
+  text-transform: none;
+}
+
+.filter-dropdown:hover {
+  border: 1px #6c757d solid;
+}
+
+.dropdown-menu {
+  padding: 15px;
+}
+
+.cities-dropdown-menu {
+  width: 325px !important;
+}
+
+.price-dropdown-menu {
+  width: 210px !important;
+}
+
+.filter-controls {
+  padding: 18px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.price-range-mob {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  div {
+    max-width: 350px;
+  }
+}
+
+@media (width <= 991px) {
+  .desktop-filters {
+    display: none;
+  }
+
+  .mobile-filters {
+    display: flex;
+    justify-content: center;
+
+    div {
+      text-align: center;
+    }
+
+    button {
+      width: 100%;
+    }
+  }
+}
+
+@media (width > 991px) {
+  .desktop-filters {
+    display: flex;
+  }
+
+  .mobile-filters {
+    display: none;
+  }
+}

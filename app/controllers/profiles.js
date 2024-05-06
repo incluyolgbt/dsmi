@@ -5,11 +5,11 @@ import { tracked } from '@glimmer/tracking';
 
 export default class ProfilesController extends Controller {
   @service router;
+  @service store;
 
-  queryParams = ['page', 'scroll'];
+  queryParams = ['page'];
 
   @tracked page = 1;
-  @tracked scroll;
 
   @action
   prevPage() {
@@ -20,6 +20,12 @@ export default class ProfilesController extends Controller {
   @action
   nextPage() {
     const page = parseInt(this.page) + 1;
+    this.router.transitionTo('profile', { queryParams: { page } });
+  }
+
+  @action
+  applyFilters() {
+    const page = 1;
     this.router.transitionTo('profile', { queryParams: { page } });
   }
 

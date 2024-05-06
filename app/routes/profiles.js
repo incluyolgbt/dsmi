@@ -14,10 +14,27 @@ export default class ProfilesRoute extends Route {
     scroll: {
       refreshModel: true,
     },
+    filter: {
+      refreshModel: true,
+    },
   };
 
-  async getProfilesCount() {
-    return await this.supabase.rpc('getProfilesCount');
+  async getProfiles(range) {
+    const filters = await this.store.peekRecord('filters', 'f01');
+
+    if (filters) {
+      return await this.store.query(
+        'mental-health-entities',
+        {
+          range,
+        },
+        { filters: filters.serialize() },
+      );
+    }
+
+    return await this.store.query('mental-health-entities', {
+      range,
+    });
   }
 
   async model(params) {
@@ -30,18 +47,10 @@ export default class ProfilesRoute extends Route {
       range = [0, 9];
     }
 
-    const res = await RSVP.hash({
-      profiles: this.store.query('mental-health-entities', {
-        range,
-      }),
-      locations: this.store.findAll('locations'),
-      profileCount: this.getProfilesCount()
-    });
+    const locations = await this.store.findAll('locations');
+    const profiles = await this.getProfiles(range);
+    const profileCount = this.supabase.profilesCount;
 
-    if (!res.profiles.length) {
-      this.router.transitionTo('not-found', 'not-found');
-    }
-
-    return { ...res };
+    return { locations, profiles, profileCount };
   }
 }

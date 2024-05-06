@@ -5,3 +5,8 @@
 .cards-container a {
   text-decoration: none;
 }
+
+.warning-message {
+  text-align: center;
+  padding: 45px 30px;
+}

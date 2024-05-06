@@ -35,10 +35,10 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+}
 
-  div {
-    max-width: 350px;
-  }
+.price-range-mob > div {
+  max-width: 350px;
 }
 
 @media (width <= 991px) {
@@ -49,14 +49,14 @@
   .mobile-filters {
     display: flex;
     justify-content: center;
+  }
 
-    div {
-      text-align: center;
-    }
+  .mobile-filters > div {
+    text-align: center;
+  }
 
-    button {
-      width: 100%;
-    }
+  .mobile-filters button {
+    width: 100%;
   }
 }
 

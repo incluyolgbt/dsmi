@@ -128,6 +128,17 @@ export default class SupabaseService extends Service {
     );
   }
 
+  getFeaturedProfiles() {
+    return new Promise(async (resolve, reject) => {
+      let { data, error } = await this.supabase.rpc('getrandomprofiles');
+      if (!error) {
+        return resolve(data);
+      } else {
+        return reject(error);
+      }
+    });
+  }
+
   rpc(...args) {
     return new Promise(async (resolve, reject) => {
       let { data, error } = await this.supabase.rpc(...args);

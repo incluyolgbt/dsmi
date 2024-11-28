@@ -11,22 +11,35 @@
   border: 1px #6c757d solid;
 }
 
-.dropdown-menu {
-  padding: 15px;
-}
-
-.cities-dropdown-menu {
-  width: 325px !important;
-}
-
-.price-dropdown-menu {
-  width: 210px !important;
-}
-
 .filter-controls {
   padding: 18px;
   font-size: 11px;
   font-weight: bold;
+}
+
+.all-fillters {
+  border: 1px #6c757d solid;
+  color: #6c757d;
+}
+
+.all-fillters:hover {
+  border: 1px #6c757d solid !important;
+  background-color: #5c636a !important;
+  color: #fff;
+}
+
+.all-fillters:active {
+  border: 1px #6c757d solid;
+  color: #6c757d;
+}
+
+.all-fillters:focus-visible {
+  border: 1px #6c757d solid;
+}
+
+.filter-count {
+  background-color: #8250ce !important;
+  margin-right: 5px;
 }
 
 .price-range-mob {
@@ -39,6 +52,16 @@
 
 .price-range-mob > div {
   max-width: 350px;
+}
+
+.input-search {
+  border-radius: 0.25rem 0 0 0.25rem;
+  height: 57px;
+}
+
+.btn-search {
+  border-radius: 0 0.25rem 0.25rem 0;
+  height: 57px;
 }
 
 @media (width <= 991px) {

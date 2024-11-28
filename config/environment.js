@@ -21,6 +21,9 @@ module.exports = function (environment) {
 
     SUPABASEURL: process.env.SUPABASEURL,
     SUPABASETOKEN: process.env.SUPABASETOKEN,
+    ALGOLIAID: process.env.ALGOLIAID,
+    ALGOLIAKEY: process.env.ALGOLIAKEY,
+    ALGOLIAINDEX: process.env.ALGOLIAINDEX,
   };
 
   if (environment === 'development') {

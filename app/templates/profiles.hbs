@@ -4,7 +4,7 @@
   class="container"
   local-class="cards-container"
   {{did-insert this.scrollToTop}}
-  {{did-update this.scrollToTop this.page}}
+  {{!-- {{did-update this.scrollToTop this.page}} --}}
 >
   <ProfilesList::Filters
     @model={{@model}}
@@ -13,7 +13,7 @@
   <div class="row gx-3">
     {{#each @model.profiles as |profile|}}
       <div id="{{profile.id}}" class="col-md-6">
-        <ProfilesList::Card @profile={{profile}} />
+        <ProfilesList::Card @profile={{profile}} @displayBadge={{true}} />
       </div>
     {{/each}}
 

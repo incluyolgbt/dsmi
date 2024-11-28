@@ -15,7 +15,7 @@
   padding: 15px;
 }
 
-.cities-dropdown-menu {
+.large-dropdown-menu {
   width: 325px !important;
 }
 
@@ -26,5 +26,12 @@
 .filter-controls {
   padding: 18px;
   font-size: 11px;
+  font-weight: bold;
+}
+
+.filter-active,
+.filter-active:hover {
+  border: 1px #8250ce solid;
+  color: #8250ce;
   font-weight: bold;
 }

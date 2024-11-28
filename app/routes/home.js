@@ -10,9 +10,11 @@ export default class HomeRoute extends Route {
     let range = [0, 3];
 
     const res = await RSVP.hash({
-      profiles: this.store.query('mental-health-entities', {
-        range,
-      }),
+      profiles: this.store.query(
+        'mental-health-entities',
+        {},
+        { random: true },
+      ),
       locations: this.store.findAll('locations'),
     });
 

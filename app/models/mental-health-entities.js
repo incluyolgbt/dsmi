@@ -9,6 +9,9 @@ export default class MentalHealthEntitiesModel extends Model {
   @attr('string') entityType;
   @attr('string') bio;
   @attr('string') location;
+  @attr('string') city;
+  @attr('string') state;
+  @attr('string') country;
   @attr('boolean') communityAffiliation;
   @attr('string') pronouns;
   @attr('string') profilePicture;

@@ -1,0 +1,122 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+    name: string;
+    title: string;
+    image: string | null | undefined;
+}
+
+const { name, title, image } = Astro.props;
+const imageAlt = `Fotografía de ${name}`;
+---
+
+<div class="name-card">
+    <div class="name-card-content">
+        {
+            image && (
+                <Image
+                    src={image}
+                    alt={imageAlt}
+                    class="name-card-image"
+                    priority
+                    width={175}
+                    height={175}
+                />
+            )
+        }
+        {
+            !image && (
+                <Image
+                    src="https://saludmental.lgbt/img/profile-pictures/1.svg"
+                    alt="Fotografía genérica"
+                    class="name-card-image"
+                    fetchpriority="high"
+                    loading="eager"
+                    width={175}
+                    height={175}
+                />
+            )
+        }
+        <div class="name-card-text">
+            <h1 class="name-card-name">{name}</h1>
+            <p class="name-card-title">{title}</p>
+        </div>
+    </div>
+</div>
+
+<style>
+    .name-card {
+        font-family: 'Gelasio', sans-serif;
+        background-color: var(--primary-dark);
+        border-radius: 25px;
+        padding: 20px;
+        margin: 0 auto;
+    }
+
+    .name-card-content {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .name-card-image {
+        width: 175px;
+        height: 175px;
+        border-radius: 16px;
+        object-fit: cover;
+        flex-shrink: 0;
+    }
+
+    .name-card-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .name-card-name {
+        font-size: 40px;
+        font-weight: 800;
+        color: var(--light-primary-text);
+        margin: 0;
+        line-height: 1.2;
+    }
+
+    .name-card-title {
+        font-size: 28px;
+        color: var(--light-text-secondary);
+        margin: 8px 0 0 0;
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 640px) {
+        .name-card {
+            padding: 35px;
+            max-width: 100%;
+        }
+
+        .name-card-content {
+            flex-direction: column;
+            text-align: left;
+            gap: 20px;
+        }
+
+        .name-card-image {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1 / 1; /* Reserve square space - adjust ratio as needed */
+        }
+
+        .name-card-text {
+            width: 100%;
+        }
+
+        .name-card-name {
+            font-size: 30px;
+        }
+
+        .name-card-title {
+            font-size: 18px;
+        }
+    }
+</style>

@@ -1,0 +1,63 @@
+.page-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem 1.5rem 0;
+}
+
+.filter-button {
+    font-family: 'Red Hat Display', sans-serif;
+    background-color: var(--primary-dark);
+    color: var(--light-primary-text);
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: opacity 0.2s ease;
+    flex-shrink: 0;
+}
+
+.filter-button:hover {
+    opacity: 0.9;
+}
+
+.filter-button:focus-visible {
+    outline: 3px solid var(--primary-dark);
+    outline-offset: 3px;
+    opacity: 0.9;
+}
+
+.filter-bar {
+    margin-bottom: 1.2rem;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+}
+
+@media (max-width: 640px) {
+    .page-content {
+        padding: 1rem 1rem 0;
+    }
+
+    .filter-button {
+        padding: 14px 24px;
+        font-size: 12px;
+    }
+}
+
+.profiles-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    @media (max-width: 640px) {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}

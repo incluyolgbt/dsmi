@@ -1,0 +1,30 @@
+---
+import {
+    buildProfilesStructuredData,
+    PROFILES_STRUCTURED_DATA_SCRIPT_ID,
+    type StructuredDataProfile,
+} from './profilesStructuredData';
+
+interface Props {
+    profiles: StructuredDataProfile[];
+    url?: string;
+    page?: number;
+    hitsPerPage?: number;
+}
+
+const { profiles, url, page = 1, hitsPerPage = profiles.length } = Astro.props;
+
+const currentUrl = url || Astro.url.href;
+const schema = buildProfilesStructuredData({
+    profiles,
+    url: currentUrl,
+    page,
+    hitsPerPage,
+});
+---
+
+<script
+    id={PROFILES_STRUCTURED_DATA_SCRIPT_ID}
+    type="application/ld+json"
+    set:html={JSON.stringify(schema)}
+/>

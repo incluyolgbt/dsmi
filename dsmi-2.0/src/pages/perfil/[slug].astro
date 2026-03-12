@@ -1,0 +1,173 @@
+---
+// Profile.astro
+import Layout from '../../layouts/Layout.astro';
+import NameCard from '../../components/profile-page/NameCard.astro';
+import SummaryCard from '../../components/profile-page/SummaryCard.astro';
+import DetailsCard from '../../components/profile-page/DetailsCard.astro';
+import ProfileSeo from '../../components/profile-page/ProfileSeo.astro';
+
+import { getCollection } from 'astro:content';
+import type {
+    FocusArea,
+    AppointmentType,
+    MentalHealthEntity,
+} from '../../content.types';
+
+export async function getStaticPaths() {
+    const profiles = await getCollection('profiles');
+
+    return [
+        ...profiles.map((item) => ({
+            params: { slug: item.data.slug },
+        })),
+    ];
+}
+
+const { slug } = Astro.params;
+
+const profileBySlug = await getCollection(
+    'profiles',
+    ({ data }) => data.slug === slug
+);
+
+if (!profileBySlug.length || !profileBySlug.at(0)?.data) {
+    return Astro.redirect(`/404`);
+}
+
+const profile: MentalHealthEntity = profileBySlug.at(0)?.data;
+const styledName = profile.lastName
+    ? `${profile.firstName} ${profile.lastName}`
+    : profile.firstName;
+---
+
+<title>{styledName} - Directorio de Salud Mental LGBTQ+</title>
+<meta
+    name="description"
+    content={`Conoce a ${styledName}, ${profile.entityType} con perspectiva de diversidad sexual y de género en ${profile.location.city}, ${profile.location.country}; en el Directorio de Salud Mental LGBTQ+.`}
+/>
+
+<link rel="canonical" href={`https://saludmental.lgbt/perfil/${slug}`} />
+<meta name="robots" content="index, follow" />
+
+<meta
+    property="og:title"
+    content={`${styledName} - Directorio de Salud Mental LGBTQ+`}
+/>
+<meta
+    property="og:description"
+    content={`Conoce a ${styledName}, ${profile.entityType} con perspectiva de diversidad sexual y de género en ${profile.location.city}, ${profile.location.country}; en el Directorio de Salud Mental LGBTQ+.`}
+/>
+
+<Layout>
+    <div class="profile-container">
+        <div class="profile-top-row">
+            <NameCard
+                name={styledName}
+                title={profile.entityType}
+                image={profile.profilePicture}
+            />
+        </div>
+
+        <div class="profile-bottom-row">
+            <SummaryCard
+                pronouns={profile.pronouns}
+                city={profile.location.city}
+                state={profile.location.state}
+                focusAreas={profile.focusAreas.map(
+                    (focusArea: FocusArea) => focusArea.name
+                )}
+                patientFocus={profile.patientFocus}
+                modalities={profile.modalities}
+                communityAffiliation={profile.communityAffiliation}
+                priceRange={profile.priceRange}
+            />
+            <DetailsCard
+                biography={profile.bio}
+                services={profile.appointmentTypes.map(
+                    (appointmentType: AppointmentType) => ({
+                        name: appointmentType.name,
+                        price:
+                            appointmentType.priceMin ===
+                            appointmentType.priceMax
+                                ? `$${appointmentType.priceMin}`
+                                : `$${appointmentType.priceMin} - $${appointmentType.priceMax}`,
+                    })
+                )}
+                profileId={profile.id}
+                profileName={styledName}
+                professionalId={profile.governmentID}
+                contact={{
+                    email: profile.email,
+                    phoneNumber: profile.phoneNumber,
+                    whatsApp: profile.whatsApp,
+                }}
+                socialMedia={profile.socialMedia}
+                academicTitles={profile.academicTitles}
+            />
+        </div>
+
+        <ProfileSeo
+            name={styledName}
+            title={profile.entityType}
+            image={profile.profilePicture}
+            biography={profile.bio}
+            contact={{
+                email: profile.email,
+                phone: profile.whatsApp,
+            }}
+            city={profile.location.city}
+            state={profile.location.state}
+            country={profile.location.country}
+            services={profile.appointmentTypes.map(
+                (appointmentType: AppointmentType) => ({
+                    name: appointmentType.name,
+                    price: `$${appointmentType.priceMin} - $${appointmentType.priceMax}`,
+                })
+            )}
+            professionalId={profile.governmentID}
+            url={`https://saludmental.lgbt/perfil/${slug}`}
+        />
+    </div>
+</Layout>
+
+<style>
+    .profile-container {
+        display: grid;
+        gap: 1.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1.5rem;
+    }
+
+    @media (min-width: 716px) {
+        .profile-container {
+            grid-template-rows: auto 1fr;
+            grid-template-columns: 1fr;
+        }
+
+        .profile-top-row {
+            grid-column: 1 / -1;
+        }
+
+        .profile-bottom-row {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 1.5rem;
+        }
+    }
+
+    @media (max-width: 989px) {
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            padding: 1.75rem 1rem 1rem;
+            gap: 0.8rem;
+        }
+
+        .profile-bottom-row {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+    }
+</style>

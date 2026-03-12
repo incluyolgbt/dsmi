@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+import FeaturedActionCards from '../components/home/FeaturedActionCards.astro';
+import HomeHero from '../components/home/HomeHero.astro';
+
+const featuredSearches = [
+    {
+        line1: 'Perfiles que ofrecen',
+        line2: 'Modalidad Virtual',
+        link: '/perfiles/?f_modalities=Virtual',
+    },
+    {
+        line1: 'Perfiles con precios de',
+        line2: '$500 MXN o menos',
+        link: '/perfiles/?f_price=under-500',
+    },
+    {
+        line1: 'Perfiles que ofrecen',
+        line2: 'Modalidad Presencial',
+        link: '/perfiles/?f_modalities=Presencial',
+    },
+];
+---
+
+<title>Directorio de Salud Mental LGBTQ+</title>
+<meta
+    name="description"
+    content="Encuentra profesionistas de la salud mental con perspectiva de diversidad sexual y de género en el Directorio de Salud Mental LGBTQ+."
+/>
+<link rel="canonical" href={`https://saludmental.lgbt/`} />
+<meta name="robots" content="index, follow" />
+
+<Layout>
+    <HomeHero />
+    <FeaturedActionCards items={featuredSearches} />
+</Layout>

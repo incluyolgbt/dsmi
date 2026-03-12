@@ -1,0 +1,439 @@
+---
+// HeaderFullWidth.astro
+interface Props {
+    logoSrc?: string;
+    logoAlt?: string;
+}
+
+const { logoSrc = '/logo.svg', logoAlt = 'Logo' } = Astro.props;
+
+const menuItems = [
+    { label: 'Inicio', href: '/' },
+    { label: 'Perfiles', href: '/perfiles/' },
+    { label: 'Preguntas Frecuentes', href: '/preguntas-frecuentes/' },
+];
+---
+
+<header class="header-wrapper" id="header" transition:persist>
+    <nav class="header-nav">
+        <div class="header-content">
+            <h1 class="header-title">
+                <a
+                    href="/"
+                    class="header-title-link"
+                    aria-label="Directorio de Salud Mental LGBTQ+ - Click para ir a la página de inicio"
+                >
+                    <span class="header-title-first-line" aria-hidden="true"
+                        >Directorio de</span
+                    >
+                    Salud Mental LGBTQ+
+                </a>
+            </h1>
+
+            {/* Desktop Menu */}
+            <ul class="nav-menu desktop-menu">
+                {
+                    menuItems.map((item) => (
+                        <li class="nav-item">
+                            <a href={item.href} class="nav-link">
+                                {item.label}
+                            </a>
+                        </li>
+                    ))
+                }
+                <li class="nav-item">
+                    <a
+                        href="/perfiles/?search=new"
+                        class="nav-link search-link"
+                        aria-label="Buscar"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.3-4.3"></path>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+
+            {/* Mobile Menu Toggle */}
+            <div class="hamburger">
+                <a
+                    class="main-nav-toggle"
+                    href="#main-nav"
+                    aria-label="Abrir o cerrar menú"
+                    aria-expanded="false"
+                    aria-controls="mobileMenu"
+                >
+                    <i>Menu</i>
+                </a>
+            </div>
+        </div>
+
+        {/* Mobile Menu */}
+        <ul class="nav-menu mobile-menu" id="mobileMenu" aria-hidden="true">
+            {
+                menuItems.map((item) => (
+                    <li class="nav-item">
+                        <a href={item.href} class="nav-link">
+                            {item.label}
+                        </a>
+                    </li>
+                ))
+            }
+            <li class="nav-item">
+                <a
+                    href="/perfiles/?search=new"
+                    class="nav-link search-link-mobile"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.3-4.3"></path>
+                    </svg>
+                    <span>Buscar</span>
+                </a>
+            </li>
+        </ul>
+
+        {/* Rainbow stripe at bottom */}
+        <div class="rainbow-stripe"></div>
+    </nav>
+</header>
+
+<style>
+    .header-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        width: 100%;
+        max-height: 120px;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    .header-wrapper.menu-open {
+        max-height: 600px;
+    }
+
+    .header-nav {
+        background: linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.3) 0%,
+            rgba(255, 255, 255, 1) 90%
+        );
+        -webkit-backdrop-filter: blur(15px);
+        backdrop-filter: blur(15px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        position: relative;
+        font-family: 'Gelasio', sans-serif;
+        padding: 1rem;
+        /* Extend background beyond safe area on iOS */
+        padding-left: max(1rem, env(safe-area-inset-left));
+        padding-right: max(1rem, env(safe-area-inset-right));
+        padding-top: max(1rem, env(safe-area-inset-top));
+    }
+
+    .rainbow-stripe {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(
+            to right,
+            #e90801,
+            #fb7315,
+            #edf311,
+            #27bd36,
+            #1f87c1,
+            #b653c2,
+            #b7e5f4,
+            #f05ece,
+            #e90801
+        );
+        background-size: 200% 100%;
+        animation: rainbow-slide 80s linear infinite;
+        -webkit-backdrop-filter: blur(15px);
+        backdrop-filter: blur(15px);
+        opacity: 0.6;
+    }
+
+    @keyframes rainbow-slide {
+        0% {
+            background-position: 0% 0;
+        }
+        100% {
+            background-position: 200% 0;
+        }
+    }
+
+    .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        padding: 1rem 2rem;
+    }
+
+    .header-title {
+        margin: 0;
+        font-size: clamp(0.75rem, 4.5vw, 1.5rem);
+        white-space: nowrap;
+    }
+
+    .header-title-link {
+        color: var(--primary-dark);
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .header-title-link:hover {
+        color: #a78bfa;
+    }
+
+    .nav-menu {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        gap: 2rem;
+        font-family: 'Red Hat Display', sans-serif;
+        text-transform: uppercase;
+    }
+
+    .desktop-menu {
+        flex: 1;
+        justify-content: right;
+    }
+
+    .mobile-menu {
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition:
+            max-height 0.3s ease,
+            opacity 0.3s ease,
+            padding 0.3s ease;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .mobile-menu.open {
+        max-height: 400px;
+        opacity: 1;
+        padding: 0 2rem 1.5rem 2rem;
+    }
+
+    .mobile-menu .nav-item {
+        padding: 0.75rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-item {
+        margin: 0;
+    }
+
+    .nav-link {
+        color: var(--primary-dark);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 16px;
+        transition: color 0.2s ease;
+        display: block;
+    }
+
+    .nav-link:hover {
+        color: #a78bfa;
+    }
+
+    .search-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .search-link svg {
+        display: block;
+    }
+
+    .search-link-mobile {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .search-link-mobile svg {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .hamburger {
+        display: none;
+        height: 26px;
+        margin-right: 0;
+    }
+
+    .hamburger a.main-nav-toggle {
+        display: block;
+        width: 28px;
+        height: 16px;
+        position: relative;
+        text-decoration: none;
+    }
+
+    .hamburger a.main-nav-toggle:after,
+    .hamburger a.main-nav-toggle:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        height: 0;
+        border-bottom: 4px solid var(--primary-dark);
+        width: 100%;
+        left: 0;
+        right: 0;
+        transition: all ease-out 0.1s;
+    }
+
+    .hamburger a.main-nav-toggle:after {
+        top: 100%;
+    }
+
+    .hamburger a.main-nav-toggle i {
+        display: block;
+        text-indent: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        height: 4px;
+        background-color: var(--primary-dark);
+        width: 100%;
+        position: absolute;
+        top: 50%;
+        transition: all ease-out 0.1s;
+        font-style: normal;
+    }
+
+    .hamburger a.main-nav-toggle.active-menu:after {
+        transform: rotate(-45deg);
+        transform-origin: center;
+        top: 50%;
+    }
+
+    .hamburger a.main-nav-toggle.active-menu:before {
+        transform: rotate(45deg);
+        transform-origin: center;
+        top: 50%;
+    }
+
+    .hamburger a.main-nav-toggle.active-menu i {
+        opacity: 0;
+    }
+
+    .header-title-first-line {
+        display: block;
+        font-size: clamp(0.5rem, 3.7vw, 1rem);
+        white-space: nowrap;
+    }
+
+    @media (max-width: 1000px) {
+        .header-content {
+            padding: 1rem 1.5rem;
+        }
+
+        .desktop-menu {
+            display: none;
+        }
+
+        .mobile-menu {
+            display: flex;
+            padding: 0 1.5rem;
+            touch-action: manipulation;
+        }
+
+        .mobile-menu.open {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+        }
+
+        .mobile-menu .nav-link {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+            -moz-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
+        .hamburger {
+            display: inline-block;
+        }
+    }
+</style>
+
+<script>
+    const headerWrapper = document.getElementById('header');
+    const menuToggle = document.querySelector('.main-nav-toggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileLinks = document.querySelectorAll('.mobile-menu .nav-link');
+
+    const updateMenuAccessibility = (isOpen: boolean) => {
+        mobileLinks.forEach((link) => {
+            link.setAttribute('tabindex', isOpen ? '0' : '-1');
+        });
+
+        mobileMenu?.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+        menuToggle?.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    };
+
+    // Initialize menu as closed
+    updateMenuAccessibility(false);
+
+    menuToggle?.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isOpening = !menuToggle.classList.contains('active-menu');
+
+        if (isOpening) {
+            menuToggle.classList.add('active-menu');
+            mobileMenu?.classList.add('open');
+            headerWrapper?.classList.add('menu-open');
+            updateMenuAccessibility(true);
+        } else {
+            menuToggle.classList.remove('active-menu');
+            mobileMenu?.classList.remove('open');
+            headerWrapper?.classList.remove('menu-open');
+            updateMenuAccessibility(false);
+        }
+    });
+
+    mobileLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+            mobileMenu?.classList.remove('open');
+            menuToggle?.classList.remove('active-menu');
+            headerWrapper?.classList.remove('menu-open');
+            updateMenuAccessibility(false);
+        });
+    });
+</script>

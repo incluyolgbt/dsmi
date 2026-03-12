@@ -1,0 +1,208 @@
+---
+interface FeaturedActionCardItem {
+    line1: string;
+    line2: string;
+    link: string;
+}
+
+interface Props {
+    items: FeaturedActionCardItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="featured-actions" aria-labelledby="featured-actions-title">
+    <div class="featured-actions__inner">
+        <h2 id="featured-actions-title" class="featured-actions__title">
+            Búsquedas destacadas
+        </h2>
+
+        <div class="featured-actions__grid">
+            {
+                items.map((item) => (
+                    <a
+                        class="featured-action-card"
+                        href={item.link}
+                        data-umami-event="home_featured_action_card_clicked"
+                        data-umami-event-link={item.link}
+                    >
+                        <span class="featured-action-card__copy">
+                            <span class="featured-action-card__line-one">
+                                {item.line1}
+                            </span>
+                            <span class="featured-action-card__line-two">
+                                {item.line2}
+                            </span>
+                        </span>
+                        <span
+                            class="featured-action-card__button"
+                            aria-hidden="true"
+                        >
+                            <svg
+                                width="30"
+                                height="30"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2.4"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <polyline points="9 18 15 12 9 6" />
+                            </svg>
+                        </span>
+                    </a>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .featured-actions {
+        width: 100%;
+        padding: 0 clamp(1rem, 4vw, 4.75rem) clamp(2.75rem, 7vw, 5.75rem);
+        background-color: #fff;
+    }
+
+    .featured-actions__inner {
+        max-width: 1780px;
+        margin: 0 auto;
+    }
+
+    .featured-actions__title {
+        margin: 0 0 clamp(1rem, 2vw, 1.5rem);
+        color: var(--primary-dark);
+        font-family: 'Gelasio', sans-serif;
+        font-size: clamp(2rem, 3vw, 3.4rem);
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: 0;
+    }
+
+    .featured-actions__grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: clamp(1rem, 2vw, 1.875rem);
+    }
+
+    .featured-action-card {
+        position: relative;
+        display: flex;
+        min-height: clamp(210px, 19vw, 300px);
+        padding: clamp(1.75rem, 3vw, 3.25rem) clamp(1.5rem, 2.8vw, 3.25rem);
+        overflow: hidden;
+        border-radius: clamp(2rem, 4vw, 5rem);
+        /* background-color: #efb2dc; */
+        background-color: var(--primary-light);
+        color: var(--primary-dark);
+        font-family: 'Red Hat Display', sans-serif;
+        text-decoration: none;
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+
+    .featured-action-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 35px rgba(27, 27, 58, 0.14);
+    }
+
+    .featured-action-card:focus-visible {
+        outline: 3px solid var(--primary-dark);
+        outline-offset: 4px;
+    }
+
+    .featured-action-card__copy {
+        position: relative;
+        z-index: 3;
+        display: flex;
+        min-width: 0;
+        padding-right: clamp(3.25rem, 4vw, 4.75rem);
+        flex-direction: column;
+        align-self: center;
+    }
+
+    .featured-action-card__line-one {
+        margin-bottom: 0.85rem;
+        font-size: clamp(1.15rem, 1.5vw, 1.95rem);
+        font-weight: 400;
+        line-height: 1.25;
+    }
+
+    .featured-action-card__line-two {
+        font-size: clamp(2.3rem, 3.55vw, 4.55rem);
+        font-weight: 800;
+        line-height: 1.12;
+        letter-spacing: 0;
+    }
+
+    .featured-action-card__button {
+        position: absolute;
+        right: clamp(1.4rem, 2.3vw, 2.75rem);
+        bottom: clamp(1.1rem, 2vw, 2rem);
+        z-index: 5;
+        display: flex;
+        width: clamp(4rem, 5.4vw, 6.75rem);
+        height: clamp(4rem, 5.4vw, 6.75rem);
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--primary-dark);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(6.1px);
+        -webkit-backdrop-filter: blur(6.1px);
+        transition:
+            background 0.2s ease,
+            box-shadow 0.2s ease,
+            transform 0.1s ease;
+    }
+
+    .featured-action-card:hover .featured-action-card__button {
+        background: rgba(255, 255, 255, 1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .featured-action-card:active .featured-action-card__button {
+        transform: scale(0.95);
+    }
+
+    @media (max-width: 1100px) {
+        .featured-actions__grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 760px) {
+        .featured-actions {
+            padding: 0 1rem 3.5rem;
+        }
+
+        .featured-actions__grid {
+            grid-template-columns: 1fr;
+        }
+
+        .featured-action-card {
+            min-height: 180px;
+            border-radius: 2.25rem;
+        }
+    }
+
+    @media (max-width: 420px) {
+        .featured-action-card {
+            min-height: 160px;
+            padding: 1.45rem 1.35rem;
+            border-radius: 1.75rem;
+        }
+
+        .featured-action-card__copy {
+            padding-right: 3.9rem;
+        }
+
+        .featured-action-card__line-two {
+            font-size: clamp(2rem, 12vw, 3rem);
+        }
+    }
+</style>

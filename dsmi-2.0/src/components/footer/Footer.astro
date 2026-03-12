@@ -1,0 +1,353 @@
+---
+const footerLinks = [
+    { label: 'Inicio', href: '/' },
+    { label: 'Perfiles', href: '/perfiles/' },
+    { label: 'Preguntas Frecuentes', href: '/preguntas-frecuentes/' },
+];
+---
+
+<footer class="site-footer" data-pride-footer>
+    <div class="footer-links" aria-label="Navegación secundaria">
+        {
+            footerLinks.map((link, index) => (
+                <>
+                    <a
+                        class={`footer-link footer-link-${index + 1}`}
+                        href={link.href}
+                    >
+                        {link.label}
+                    </a>
+                </>
+            ))
+        }
+    </div>
+
+    <div class="footer-gradient" aria-hidden="true">
+        <svg
+            class="footer-gradient-svg"
+            viewBox="0 0 1271 599"
+            preserveAspectRatio="none"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <g filter="url(#pride-footer-blur)">
+                <rect
+                    x="-16"
+                    y="31"
+                    width="174"
+                    height="583"
+                    fill="url(#pride-footer-gradient-short)"></rect>
+                <rect
+                    x="125"
+                    y="111"
+                    width="174"
+                    height="503"
+                    fill="url(#pride-footer-gradient-medium)"></rect>
+                <rect
+                    x="266"
+                    y="55"
+                    width="174"
+                    height="559"
+                    fill="url(#pride-footer-gradient-tall)"></rect>
+                <rect
+                    x="407"
+                    y="0"
+                    width="175"
+                    height="614"
+                    fill="url(#pride-footer-gradient-full)"></rect>
+                <rect
+                    x="549"
+                    y="0"
+                    width="173"
+                    height="614"
+                    fill="url(#pride-footer-gradient-full)"></rect>
+                <rect
+                    x="689"
+                    y="0"
+                    width="175"
+                    height="614"
+                    fill="url(#pride-footer-gradient-full)"></rect>
+                <rect
+                    x="831"
+                    y="55"
+                    width="174"
+                    height="559"
+                    fill="url(#pride-footer-gradient-tall)"></rect>
+                <rect
+                    x="972"
+                    y="111"
+                    width="174"
+                    height="503"
+                    fill="url(#pride-footer-gradient-medium)"></rect>
+                <rect
+                    x="1113"
+                    y="31"
+                    width="174"
+                    height="583"
+                    fill="url(#pride-footer-gradient-short)"></rect>
+            </g>
+            <defs>
+                <filter
+                    id="pride-footer-blur"
+                    x="-46"
+                    y="-30"
+                    width="1363"
+                    height="674"
+                    filterUnits="userSpaceOnUse"
+                    color-interpolation-filters="sRGB"
+                >
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"
+                    ></feFlood>
+                    <feBlend
+                        mode="normal"
+                        in="SourceGraphic"
+                        in2="BackgroundImageFix"
+                        result="shape"></feBlend>
+                    <feGaussianBlur
+                        stdDeviation="15"
+                        result="effect1_foregroundBlur"></feGaussianBlur>
+                </filter>
+
+                <linearGradient
+                    id="pride-footer-gradient-short"
+                    x1="0"
+                    y1="614"
+                    x2="0"
+                    y2="31"
+                    gradientUnits="userSpaceOnUse"
+                >
+                    <stop stop-color="#e40303"></stop>
+                    <stop offset="0.16" stop-color="#ff8c00"></stop>
+                    <stop offset="0.32" stop-color="#ffed00"></stop>
+                    <stop offset="0.48" stop-color="#008026"></stop>
+                    <stop offset="0.64" stop-color="#24408e"></stop>
+                    <stop offset="0.8" stop-color="#732982"></stop>
+                    <stop offset="1" stop-color="#ffffff" stop-opacity="0"
+                    ></stop>
+                </linearGradient>
+                <linearGradient
+                    id="pride-footer-gradient-medium"
+                    x1="0"
+                    y1="614"
+                    x2="0"
+                    y2="111"
+                    gradientUnits="userSpaceOnUse"
+                >
+                    <stop stop-color="#e40303"></stop>
+                    <stop offset="0.16" stop-color="#ff8c00"></stop>
+                    <stop offset="0.32" stop-color="#ffed00"></stop>
+                    <stop offset="0.48" stop-color="#008026"></stop>
+                    <stop offset="0.64" stop-color="#24408e"></stop>
+                    <stop offset="0.8" stop-color="#732982"></stop>
+                    <stop offset="1" stop-color="#ffffff" stop-opacity="0"
+                    ></stop>
+                </linearGradient>
+                <linearGradient
+                    id="pride-footer-gradient-tall"
+                    x1="0"
+                    y1="614"
+                    x2="0"
+                    y2="55"
+                    gradientUnits="userSpaceOnUse"
+                >
+                    <stop stop-color="#e40303"></stop>
+                    <stop offset="0.16" stop-color="#ff8c00"></stop>
+                    <stop offset="0.32" stop-color="#ffed00"></stop>
+                    <stop offset="0.48" stop-color="#008026"></stop>
+                    <stop offset="0.64" stop-color="#24408e"></stop>
+                    <stop offset="0.8" stop-color="#732982"></stop>
+                    <stop offset="1" stop-color="#ffffff" stop-opacity="0"
+                    ></stop>
+                </linearGradient>
+                <linearGradient
+                    id="pride-footer-gradient-full"
+                    x1="0"
+                    y1="614"
+                    x2="0"
+                    y2="0"
+                    gradientUnits="userSpaceOnUse"
+                >
+                    <stop stop-color="#e40303"></stop>
+                    <stop offset="0.16" stop-color="#ff8c00"></stop>
+                    <stop offset="0.32" stop-color="#ffed00"></stop>
+                    <stop offset="0.48" stop-color="#008026"></stop>
+                    <stop offset="0.64" stop-color="#24408e"></stop>
+                    <stop offset="0.8" stop-color="#732982"></stop>
+                    <stop offset="1" stop-color="#ffffff" stop-opacity="0"
+                    ></stop>
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
+</footer>
+
+<script>
+    const updatePrideFooter = () => {
+        const footer = document.querySelector<HTMLElement>(
+            '[data-pride-footer]'
+        );
+
+        if (!footer) return;
+
+        const rect = footer.getBoundingClientRect();
+        const viewportHeight = window.innerHeight || 1;
+        const visibleFooterHeight = viewportHeight - rect.top;
+        const quietFooterHeight = Math.min(
+            rect.height * 0.38,
+            viewportHeight * 0.55
+        );
+        const stretchableHeight = Math.max(rect.height - quietFooterHeight, 1);
+        const progress = Math.min(
+            Math.max(
+                (visibleFooterHeight - quietFooterHeight) / stretchableHeight,
+                0
+            ),
+            1
+        );
+        const stretch = progress * 1.28;
+
+        footer.style.setProperty('--footer-stretch', stretch.toFixed(3));
+        footer.style.setProperty(
+            '--footer-gradient-opacity',
+            `${(progress * 0.72).toFixed(3)}`
+        );
+        footer.style.setProperty(
+            '--footer-link-offset',
+            `${(progress * 24).toFixed(2)}px`
+        );
+        footer.dataset.gradientActive = progress > 0.01 ? 'true' : 'false';
+    };
+
+    const initPrideFooter = () => {
+        window.removeEventListener('scroll', updatePrideFooter);
+        window.removeEventListener('resize', updatePrideFooter);
+        updatePrideFooter();
+        window.addEventListener('scroll', updatePrideFooter, { passive: true });
+        window.addEventListener('resize', updatePrideFooter);
+    };
+
+    document.addEventListener('astro:page-load', initPrideFooter);
+    initPrideFooter();
+</script>
+
+<style>
+    .site-footer {
+        --footer-stretch: 0;
+        --footer-gradient-opacity: 0;
+        --footer-link-offset: 0px;
+        position: relative;
+        z-index: 1;
+        margin-top: auto;
+        min-height: max(42rem, 125vh);
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding: clamp(4rem, 14vh, 7rem) max(1rem, env(safe-area-inset-left))
+            max(2rem, env(safe-area-inset-bottom))
+            max(1rem, env(safe-area-inset-right));
+        overflow: clip;
+        font-family: 'Red Hat Display', sans-serif;
+    }
+
+    .footer-links {
+        width: min(100%, 1100px);
+        min-height: clamp(8rem, 24vh, 13rem);
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: clamp(1rem, 5vw, 4rem);
+        position: sticky;
+        top: clamp(8rem, 42vh, 19rem);
+        z-index: 2;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: clamp(0.72rem, 1.3vw, 0.95rem);
+        font-weight: 800;
+    }
+
+    .footer-link {
+        color: var(--primary-dark);
+        text-decoration: none;
+        text-shadow: 0 1px 14px rgba(255, 255, 255, 0.9);
+        transform: translateY(calc(var(--footer-link-offset) * -0.7));
+        transition:
+            color 0.2s ease,
+            transform 0.12s linear;
+    }
+
+    .footer-link:nth-child(2) {
+        transform: translateY(calc(var(--footer-link-offset) * -0.75));
+    }
+
+    .footer-link:nth-child(3) {
+        transform: translateY(calc(var(--footer-link-offset) * -0.7));
+    }
+
+    .footer-link:hover,
+    .footer-link:focus-visible {
+        color: #732982;
+    }
+
+    .footer-gradient {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 0;
+        height: clamp(11rem, 38vh, 30rem);
+        transform: scaleY(var(--footer-stretch));
+        transform-origin: bottom center;
+        pointer-events: none;
+        opacity: var(--footer-gradient-opacity);
+        visibility: hidden;
+        transition:
+            opacity 0.12s linear,
+            transform 0.12s linear,
+            visibility 0s linear 0.12s;
+    }
+
+    .site-footer[data-gradient-active='true'] .footer-gradient {
+        visibility: visible;
+        transition:
+            opacity 0.12s linear,
+            transform 0.12s linear;
+    }
+
+    .footer-gradient-svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+    @media (max-width: 720px) {
+        .site-footer {
+            min-height: max(21rem, 64vh);
+            padding-top: clamp(2.5rem, 10vh, 4rem);
+        }
+
+        .footer-links {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+            min-height: auto;
+            top: clamp(5rem, 30vh, 10rem);
+        }
+
+        .footer-link,
+        .footer-link:nth-child(2),
+        .footer-link:nth-child(3) {
+            transform: translateY(calc(var(--footer-link-offset) * -0.25));
+        }
+
+        .footer-gradient {
+            height: 9rem;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .footer-link,
+        .footer-gradient {
+            transition: none;
+        }
+    }
+</style>

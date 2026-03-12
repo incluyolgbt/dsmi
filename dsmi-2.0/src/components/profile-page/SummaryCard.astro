@@ -1,0 +1,288 @@
+---
+interface Props {
+    pronouns: string[];
+    city: string;
+    state: string;
+    focusAreas: string[];
+    patientFocus?: string[];
+    modalities: string[];
+    communityAffiliation: boolean | undefined | null;
+    priceRange: [number, number];
+}
+
+const {
+    pronouns,
+    city,
+    state,
+    focusAreas,
+    patientFocus = [],
+    modalities,
+    communityAffiliation,
+    priceRange,
+} = Astro.props;
+
+const sectionIcons = {
+    location: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#1A1A2E"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 21C15.5 17.4 19 14.1764 19 10.2C19 6.22355 15.866 3 12 3C8.13401 3 5 6.22355 5 10.2C5 14.1764 8.5 17.4 12 21Z" stroke="#1A1A2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M12 12C13.1046 12 14 11.1046 14 10C14 8.89543 13.1046 8 12 8C10.8954 8 10 8.89543 10 10C10 11.1046 10.8954 12 12 12Z" stroke="#1A1A2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>`,
+    price: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#1A1A2e"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle cx="12" cy="12" r="10" stroke="width=" 24"="" height="24" "="" stroke-width="1.9200000000000004"></circle> <path d="M12 17V17.5V18" stroke="width=" 24"="" height="24" "="" stroke-width="1.9200000000000004" stroke-linecap="round"></path> <path d="M12 6V6.5V7" stroke="width=" 24"="" height="24" "="" stroke-width="1.9200000000000004" stroke-linecap="round"></path> <path d="M15 9.5C15 8.11929 13.6569 7 12 7C10.3431 7 9 8.11929 9 9.5C9 10.8807 10.3431 12 12 12C13.6569 12 15 13.1193 15 14.5C15 15.8807 13.6569 17 12 17C10.3431 17 9 15.8807 9 14.5" stroke="width=" 24"="" height="24" "="" stroke-width="1.9200000000000004" stroke-linecap="round"></path> </g></svg>`,
+    patientFocus: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M11.2691 4.41115C11.5006 3.89177 11.6164 3.63208 11.7776 3.55211C11.9176 3.48263 12.082 3.48263 12.222 3.55211C12.3832 3.63208 12.499 3.89177 12.7305 4.41115L14.5745 8.54808C14.643 8.70162 14.6772 8.77839 14.7302 8.83718C14.777 8.8892 14.8343 8.93081 14.8982 8.95929C14.9705 8.99149 15.0541 9.00031 15.2213 9.01795L19.7256 9.49336C20.2911 9.55304 20.5738 9.58288 20.6997 9.71147C20.809 9.82316 20.8598 9.97956 20.837 10.1342C20.8108 10.3122 20.5996 10.5025 20.1772 10.8832L16.8125 13.9154C16.6877 14.0279 16.6252 14.0842 16.5857 14.1527C16.5507 14.2134 16.5288 14.2807 16.5215 14.3503C16.5132 14.429 16.5306 14.5112 16.5655 14.6757L17.5053 19.1064C17.6233 19.6627 17.6823 19.9408 17.5989 20.1002C17.5264 20.2388 17.3934 20.3354 17.2393 20.3615C17.0619 20.3915 16.8156 20.2495 16.323 19.9654L12.3995 17.7024C12.2539 17.6184 12.1811 17.5765 12.1037 17.56C12.0352 17.5455 11.9644 17.5455 11.8959 17.56C11.8185 17.5765 11.7457 17.6184 11.6001 17.7024L7.67662 19.9654C7.18404 20.2495 6.93775 20.3915 6.76034 20.3615C6.60623 20.3354 6.47319 20.2388 6.40075 20.1002C6.31736 19.9408 6.37635 19.6627 6.49434 19.1064L7.4341 14.6757C7.46898 14.5112 7.48642 14.429 7.47814 14.3503C7.47081 14.2807 7.44894 14.2134 7.41394 14.1527C7.37439 14.0842 7.31195 14.0279 7.18708 13.9154L3.82246 10.8832C3.40005 10.5025 3.18884 10.3122 3.16258 10.1342C3.13978 9.97956 3.19059 9.82316 3.29993 9.71147C3.42581 9.58288 3.70856 9.55304 4.27406 9.49336L8.77835 9.01795C8.94553 9.00031 9.02911 8.99149 9.10139 8.95929C9.16534 8.93081 9.2226 8.8892 9.26946 8.83718C9.32241 8.77839 9.35663 8.70162 9.42508 8.54808L11.2691 4.41115Z" stroke="#1B1B3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>`,
+    focusAreas: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M5.44152 5.00024C5.00819 5.00024 4.63559 5.27423 4.50847 5.67256C4.12006 6.88964 3.54128 8.7533 3.03552 10.582C3.77685 10.2098 4.61396 10.0002 5.5 10.0002C8.08018 10.0002 10.2454 11.7769 10.839 14.1737C11.1739 14.0666 11.5598 14.0002 12 14.0002C12.4402 14.0002 12.8261 14.0666 13.161 14.1737C13.7546 11.7769 15.9198 10.0002 18.5 10.0002C19.386 10.0002 20.2231 10.2098 20.9645 10.582C20.4587 8.7533 19.8799 6.88964 19.4915 5.67256C19.3644 5.27423 18.9918 5.00024 18.5585 5.00024H17C16.4477 5.00024 16 4.55253 16 4.00024C16 3.44796 16.4477 3.00024 17 3.00024H18.5585C19.8469 3.00024 21.0005 3.82262 21.3969 5.06451C21.8162 6.3784 22.4602 8.45388 23.0003 10.4437C23.2702 11.438 23.517 12.4208 23.6969 13.2818C23.8041 13.7942 23.8932 14.2893 23.9465 14.7302C23.9818 14.9818 24 15.2389 24 15.5002C24 18.5378 21.5376 21.0002 18.5 21.0002C15.7742 21.0002 13.5116 19.0174 13.0758 16.4154C12.8172 16.1044 12.3886 16.0002 12 16.0002C11.6114 16.0002 11.1828 16.1044 10.9242 16.4154C10.4884 19.0174 8.22578 21.0002 5.5 21.0002C2.46243 21.0002 0 18.5378 0 15.5002C0 15.2389 0.0182295 14.9818 0.0534864 14.7302C0.106769 14.2893 0.195948 13.7942 0.303069 13.2818C0.483034 12.4208 0.729752 11.438 0.99968 10.4437C1.53984 8.45388 2.18384 6.3784 2.60314 5.06451C2.99947 3.82262 4.15313 3.00024 5.44152 3.00024H7C7.55228 3.00024 8 3.44796 8 4.00024C8 4.55253 7.55228 5.00024 7 5.00024H5.44152ZM2.00992 15.5002C2.00992 17.4278 3.57248 18.9903 5.5 18.9903C7.42752 18.9903 8.99008 17.4278 8.99008 15.5002C8.99008 13.5727 7.42752 12.0102 5.5 12.0102C3.57248 12.0102 2.00992 13.5727 2.00992 15.5002ZM15.0099 15.5002C15.0099 17.4278 16.5725 18.9903 18.5 18.9903C20.4275 18.9903 21.9901 17.4278 21.9901 15.5002C21.9901 13.5727 20.4275 12.0102 18.5 12.0102C16.5725 12.0102 15.0099 13.5727 15.0099 15.5002Z" fill="#1A1A2E"></path> </g></svg>`,
+    modalities: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>`,
+    pronouns: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>`,
+    communityRelation: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`,
+};
+---
+
+<div class="summary-card">
+    <div class="summary-card-section">
+        <div class="summary-card-section-header">
+            <span class="summary-card-icon">
+                <Fragment set:html={sectionIcons.location} />
+            </span>
+            <h2 class="summary-card-section-title">Ubicación</h2>
+        </div>
+        <p class="summary-card-section-content">
+            {city}, {state}
+        </p>
+    </div>
+
+    <div class="summary-card-section">
+        <div class="summary-card-section-header">
+            <span class="summary-card-icon">
+                <Fragment set:html={sectionIcons.price} />
+            </span>
+            <h2 class="summary-card-section-title">Rango de precio</h2>
+        </div>
+        <p class="summary-card-section-content">
+            {
+                priceRange[0] === priceRange[1] ? (
+                    <span aria-label={`${priceRange[0]} pesos mexicanos`}>
+                        ${priceRange[0]} MXN
+                    </span>
+                ) : (
+                    <span
+                        aria-label={`${priceRange[0]} pesos mexicanos a ${priceRange[1]} pesos mexicanos`}
+                    >
+                        ${priceRange[0]} MXN - ${priceRange[1]} MXN
+                    </span>
+                )
+            }
+        </p>
+    </div>
+
+    {
+        patientFocus.length > 0 && (
+            <div class="summary-card-section">
+                <div class="summary-card-section-header">
+                    <span class="summary-card-icon">
+                        <Fragment set:html={sectionIcons.patientFocus} />
+                    </span>
+                    <h2 class="summary-card-section-title">
+                        Áreas de especialidad
+                    </h2>
+                </div>
+                <div class="summary-card-pills-container">
+                    {patientFocus.map((item) => (
+                        <span class="summary-card-pill">{item}</span>
+                    ))}
+                </div>
+            </div>
+        )
+    }
+
+    {
+        focusAreas.length > 0 && (
+            <div class="summary-card-section">
+                <div class="summary-card-section-header">
+                    <span class="summary-card-icon">
+                        <Fragment set:html={sectionIcons.focusAreas} />
+                    </span>
+                    <h2 class="summary-card-section-title">Enfoque</h2>
+                </div>
+                <div class="summary-card-pills-container">
+                    {focusAreas.map((item) => (
+                        <span class="summary-card-pill">{item}</span>
+                    ))}
+                </div>
+            </div>
+        )
+    }
+
+    {
+        modalities.length > 0 && (
+            <div class="summary-card-section">
+                <div class="summary-card-section-header">
+                    <span class="summary-card-icon">
+                        <Fragment set:html={sectionIcons.modalities} />
+                    </span>
+                    <h2 class="summary-card-section-title">Modalidades</h2>
+                </div>
+                <div class="summary-card-pills-container">
+                    {modalities.map((modality) => (
+                        <span class="summary-card-pill">{modality}</span>
+                    ))}
+                </div>
+            </div>
+        )
+    }
+
+    {
+        pronouns.length > 0 && (
+            <div class="summary-card-section">
+                <div class="summary-card-section-header">
+                    <span class="summary-card-icon">
+                        <Fragment set:html={sectionIcons.pronouns} />
+                    </span>
+                    <h2 class="summary-card-section-title">Pronombres</h2>
+                </div>
+                <div class="summary-card-pills-container">
+                    {pronouns.map((pronoun) => (
+                        <span class="summary-card-pill">{pronoun}</span>
+                    ))}
+                </div>
+            </div>
+        )
+    }
+
+    {
+        typeof communityAffiliation === 'boolean' && (
+            <div class="summary-card-section">
+                <div class="summary-card-section-header">
+                    <span class="summary-card-icon">
+                        <Fragment set:html={sectionIcons.communityRelation} />
+                    </span>
+                    <h2 class="summary-card-section-title">
+                        Relación con la comunidad
+                    </h2>
+                </div>
+                {communityAffiliation && (
+                    <p class="summary-card-section-content">
+                        Se identifica cómo LGBTQ+
+                    </p>
+                )}
+                {communityAffiliation === false && (
+                    <p class="summary-card-section-content">
+                        Se identifica cómo aliade
+                    </p>
+                )}
+            </div>
+        )
+    }
+</div>
+
+<style>
+    .summary-card {
+        background: var(--primary-light);
+        border-radius: 32px;
+        padding: 48px;
+        margin: 0;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    .summary-card-section {
+        margin-bottom: 28px;
+    }
+
+    .summary-card-section:last-child {
+        margin-bottom: 0;
+    }
+
+    .summary-card-section-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    .summary-card-icon {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .summary-card-section-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--primary-dark);
+        margin: 0;
+        text-transform: uppercase;
+        font-family: 'Red Hat Display', sans-serif;
+        letter-spacing: 0.7px;
+    }
+
+    .summary-card-section-content {
+        font-size: 16px;
+        color: var(--secondary-dark);
+        margin: 0 0 0 36px;
+        line-height: 1.5;
+        font-family: 'Red Hat Display', sans-serif;
+        font-weight: 500;
+    }
+
+    .summary-card-pills-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-left: 36px;
+    }
+
+    .summary-card-pill {
+        background-color: rgba(255, 255, 255, 0.5);
+        color: var(--secondary-dark);
+        padding: 10px 24px;
+        border-radius: 24px;
+        font-size: 16px;
+        font-weight: 500;
+        white-space: nowrap;
+        display: inline-block;
+        font-family: 'Red Hat Display', sans-serif;
+    }
+
+    @media (max-width: 640px) {
+        .summary-card {
+            padding: 35px;
+            border-radius: 24px;
+        }
+
+        .summary-card-title {
+            font-size: 30px;
+            margin-bottom: 24px;
+        }
+
+        .summary-card-section {
+            margin-bottom: 28px;
+        }
+
+        .summary-card-section-header {
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .summary-card-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .summary-card-icon :global(svg) {
+            width: 20px;
+            height: 20px;
+        }
+
+        .summary-card-pill {
+            font-size: 14px;
+            padding: 8px 16px;
+        }
+
+        .summary-card-pills-container {
+            gap: 10px;
+            margin-left: 30px;
+        }
+
+        .summary-card-section-content {
+            margin-left: 30px;
+        }
+    }
+</style>

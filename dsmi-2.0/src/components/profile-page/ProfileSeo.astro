@@ -1,0 +1,94 @@
+---
+interface Service {
+    name: string;
+    price: string;
+}
+
+interface Contact {
+    email?: string;
+    phone?: string;
+}
+
+interface Props {
+    name: string;
+    title: string;
+    image: string;
+    biography: string;
+    city: string;
+    state: string;
+    country: string;
+    services: Service[];
+    contact: Contact;
+    professionalId?: string;
+    url?: string;
+}
+
+const {
+    name,
+    title,
+    image,
+    biography,
+    city,
+    state,
+    country,
+    services,
+    contact,
+    professionalId,
+    url,
+} = Astro.props;
+
+// Get the current URL if not provided
+const currentUrl = url || Astro.url.href;
+
+const type = title.includes('psic') ? 'Person' : 'MedicalBusiness';
+
+// Create the JSON-LD schema
+const schema = {
+    '@context': 'https://schema.org',
+    '@type': type,
+    name: name,
+    ...(type === 'Person' && { jobTitle: title }),
+    image: image,
+    url: currentUrl,
+    description: biography,
+    address: {
+        '@type': 'PostalAddress',
+        addressLocality: city,
+        addressRegion: state,
+        addressCountry: country,
+    },
+    // Contact information
+    ...(contact.email && { email: contact.email }),
+    ...(contact.phone && { telephone: contact.phone }),
+    // Services offered
+    ...(services.length > 0 && {
+        makesOffer: services.map((service) => ({
+            '@type': 'Offer',
+            itemOffered: {
+                '@type': 'Service',
+                name: service.name,
+            },
+            priceSpecification: {
+                '@type': 'PriceSpecification',
+                price: service.price,
+                priceCurrency: 'MXN',
+            },
+        })),
+    }),
+    // Professional credentials
+    ...(professionalId && {
+        hasCredential: {
+            '@type': 'EducationalOccupationalCredential',
+            credentialCategory: 'Cédula Profesional',
+            identifier: professionalId,
+        },
+    }),
+    // Knowledge of Spanish
+    knowsLanguage: {
+        '@type': 'Language',
+        name: 'Español',
+    },
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

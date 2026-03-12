@@ -1,0 +1,393 @@
+---
+import ServicesList from './ServicesList.astro';
+
+interface Props {
+    biography: string;
+    services: { name: string; price: string }[];
+    profileId?: string;
+    profileName?: string;
+    professionalId?: string;
+    contact: {
+        email?: string;
+        phoneNumber?: string;
+        whatsApp?: string;
+    };
+    socialMedia: {
+        name: string;
+        handle: string;
+        url: string;
+    }[];
+    academicTitles: {
+        title: string;
+        professionalId: string;
+    }[];
+}
+
+const {
+    biography,
+    services,
+    profileId,
+    profileName,
+    professionalId,
+    contact,
+    socialMedia,
+    academicTitles,
+} = Astro.props;
+
+const socialIcons = {
+    phone: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 5.5C3 14.0604 9.93959 21 18.5 21C18.8862 21 19.2691 20.9859 19.6483 20.9581C20.0834 20.9262 20.3009 20.9103 20.499 20.7963C20.663 20.7019 20.8185 20.5345 20.9007 20.364C21 20.1582 21 19.9181 21 19.438V16.6207C21 16.2169 21 16.015 20.9335 15.842C20.8749 15.6891 20.7795 15.553 20.6559 15.4456C20.516 15.324 20.3262 15.255 19.9468 15.117L16.74 13.9509C16.2985 13.7904 16.0777 13.7101 15.8683 13.7237C15.6836 13.7357 15.5059 13.7988 15.3549 13.9058C15.1837 14.0271 15.0629 14.2285 14.8212 14.6314L14 16C11.3501 14.7999 9.2019 12.6489 8 10L9.36863 9.17882C9.77145 8.93713 9.97286 8.81628 10.0942 8.64506C10.2012 8.49408 10.2643 8.31637 10.2763 8.1317C10.2899 7.92227 10.2096 7.70153 10.0491 7.26005L8.88299 4.05321C8.745 3.67376 8.67601 3.48403 8.55442 3.3441C8.44701 3.22049 8.31089 3.12515 8.15802 3.06645C7.98496 3 7.78308 3 7.37932 3H4.56201C4.08188 3 3.84181 3 3.63598 3.09925C3.4655 3.18146 3.29814 3.33701 3.2037 3.50103C3.08968 3.69907 3.07375 3.91662 3.04189 4.35173C3.01413 4.73086 3 5.11378 3 5.5Z" stroke="#1b1b3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>',
+    email: '<svg width="24" height="24" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#1b1b3a" stroke="#1b1b3a"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> .st0{fill:#1b1b3a;} </style> <g> <path class="st0" d="M510.678,112.275c-2.308-11.626-7.463-22.265-14.662-31.054c-1.518-1.915-3.104-3.63-4.823-5.345 c-12.755-12.818-30.657-20.814-50.214-20.814H71.021c-19.557,0-37.395,7.996-50.21,20.814c-1.715,1.715-3.301,3.43-4.823,5.345 C8.785,90.009,3.63,100.649,1.386,112.275C0.464,116.762,0,121.399,0,126.087V385.92c0,9.968,2.114,19.55,5.884,28.203 c3.497,8.26,8.653,15.734,14.926,22.001c1.59,1.586,3.169,3.044,4.892,4.494c12.286,10.175,28.145,16.32,45.319,16.32h369.958 c17.18,0,33.108-6.145,45.323-16.384c1.718-1.386,3.305-2.844,4.891-4.43c6.27-6.267,11.425-13.741,14.994-22.001v-0.064 c3.769-8.653,5.812-18.171,5.812-28.138V126.087C512,121.399,511.543,116.762,510.678,112.275z M46.509,101.571 c6.345-6.338,14.866-10.175,24.512-10.175h369.958c9.646,0,18.242,3.837,24.512,10.175c1.122,1.129,2.179,2.387,3.112,3.637 L274.696,274.203c-5.348,4.687-11.954,7.002-18.696,7.002c-6.674,0-13.276-2.315-18.695-7.002L43.472,105.136 C44.33,103.886,45.387,102.7,46.509,101.571z M36.334,385.92V142.735L176.658,265.15L36.405,387.435 C36.334,386.971,36.334,386.449,36.334,385.92z M440.979,420.597H71.021c-6.281,0-12.158-1.651-17.174-4.552l147.978-128.959 l13.815,12.018c11.561,10.046,26.028,15.134,40.36,15.134c14.406,0,28.872-5.088,40.432-15.134l13.808-12.018l147.92,128.959 C453.137,418.946,447.26,420.597,440.979,420.597z M475.666,385.92c0,0.529,0,1.051-0.068,1.515L335.346,265.221L475.666,142.8 V385.92z"></path> </g> </g></svg>',
+    whatsapp:
+        '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M3.50002 12C3.50002 7.30558 7.3056 3.5 12 3.5C16.6944 3.5 20.5 7.30558 20.5 12C20.5 16.6944 16.6944 20.5 12 20.5C10.3278 20.5 8.77127 20.0182 7.45798 19.1861C7.21357 19.0313 6.91408 18.9899 6.63684 19.0726L3.75769 19.9319L4.84173 17.3953C4.96986 17.0955 4.94379 16.7521 4.77187 16.4751C3.9657 15.176 3.50002 13.6439 3.50002 12ZM12 1.5C6.20103 1.5 1.50002 6.20101 1.50002 12C1.50002 13.8381 1.97316 15.5683 2.80465 17.0727L1.08047 21.107C0.928048 21.4637 0.99561 21.8763 1.25382 22.1657C1.51203 22.4552 1.91432 22.5692 2.28599 22.4582L6.78541 21.1155C8.32245 21.9965 10.1037 22.5 12 22.5C17.799 22.5 22.5 17.799 22.5 12C22.5 6.20101 17.799 1.5 12 1.5ZM14.2925 14.1824L12.9783 15.1081C12.3628 14.7575 11.6823 14.2681 10.9997 13.5855C10.2901 12.8759 9.76402 12.1433 9.37612 11.4713L10.2113 10.7624C10.5697 10.4582 10.6678 9.94533 10.447 9.53028L9.38284 7.53028C9.23954 7.26097 8.98116 7.0718 8.68115 7.01654C8.38113 6.96129 8.07231 7.046 7.84247 7.24659L7.52696 7.52195C6.76823 8.18414 6.3195 9.2723 6.69141 10.3741C7.07698 11.5163 7.89983 13.314 9.58552 14.9997C11.3991 16.8133 13.2413 17.5275 14.3186 17.8049C15.1866 18.0283 16.008 17.7288 16.5868 17.2572L17.1783 16.7752C17.4313 16.5691 17.5678 16.2524 17.544 15.9269C17.5201 15.6014 17.3389 15.308 17.0585 15.1409L15.3802 14.1409C15.0412 13.939 14.6152 13.9552 14.2925 14.1824Z" fill="#1b1b3a"></path> </g></svg>',
+    instagram:
+        '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" fill="#1b1b3a"></path> <path d="M18 5C17.4477 5 17 5.44772 17 6C17 6.55228 17.4477 7 18 7C18.5523 7 19 6.55228 19 6C19 5.44772 18.5523 5 18 5Z" fill="#1b1b3a"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M1.65396 4.27606C1 5.55953 1 7.23969 1 10.6V13.4C1 16.7603 1 18.4405 1.65396 19.7239C2.2292 20.8529 3.14708 21.7708 4.27606 22.346C5.55953 23 7.23969 23 10.6 23H13.4C16.7603 23 18.4405 23 19.7239 22.346C20.8529 21.7708 21.7708 20.8529 22.346 19.7239C23 18.4405 23 16.7603 23 13.4V10.6C23 7.23969 23 5.55953 22.346 4.27606C21.7708 3.14708 20.8529 2.2292 19.7239 1.65396C18.4405 1 16.7603 1 13.4 1H10.6C7.23969 1 5.55953 1 4.27606 1.65396C3.14708 2.2292 2.2292 3.14708 1.65396 4.27606ZM13.4 3H10.6C8.88684 3 7.72225 3.00156 6.82208 3.0751C5.94524 3.14674 5.49684 3.27659 5.18404 3.43597C4.43139 3.81947 3.81947 4.43139 3.43597 5.18404C3.27659 5.49684 3.14674 5.94524 3.0751 6.82208C3.00156 7.72225 3 8.88684 3 10.6V13.4C3 15.1132 3.00156 16.2777 3.0751 17.1779C3.14674 18.0548 3.27659 18.5032 3.43597 18.816C3.81947 19.5686 4.43139 20.1805 5.18404 20.564C5.49684 20.7234 5.94524 20.8533 6.82208 20.9249C7.72225 20.9984 8.88684 21 10.6 21H13.4C15.1132 21 16.2777 20.9984 17.1779 20.9249C18.0548 20.8533 18.5032 20.7234 18.816 20.564C19.5686 20.1805 20.1805 19.5686 20.564 18.816C20.7234 18.5032 20.8533 18.0548 20.9249 17.1779C20.9984 16.2777 21 15.1132 21 13.4V10.6C21 8.88684 20.9984 7.72225 20.9249 6.82208C20.8533 5.94524 20.7234 5.49684 20.564 5.18404C20.1805 4.43139 19.5686 3.81947 18.816 3.43597C18.5032 3.27659 18.0548 3.14674 17.1779 3.0751C16.2777 3.00156 15.1132 3 13.4 3Z" fill="#1b1b3a"></path> </g></svg>',
+    facebook:
+        '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M20 1C21.6569 1 23 2.34315 23 4V20C23 21.6569 21.6569 23 20 23H4C2.34315 23 1 21.6569 1 20V4C1 2.34315 2.34315 1 4 1H20ZM20 3C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H15V13.9999H17.0762C17.5066 13.9999 17.8887 13.7245 18.0249 13.3161L18.4679 11.9871C18.6298 11.5014 18.2683 10.9999 17.7564 10.9999H15V8.99992C15 8.49992 15.5 7.99992 16 7.99992H18C18.5523 7.99992 19 7.5522 19 6.99992V6.31393C19 5.99091 18.7937 5.7013 18.4813 5.61887C17.1705 5.27295 16 5.27295 16 5.27295C13.5 5.27295 12 6.99992 12 8.49992V10.9999H10C9.44772 10.9999 9 11.4476 9 11.9999V12.9999C9 13.5522 9.44771 13.9999 10 13.9999H12V21H4C3.44772 21 3 20.5523 3 20V4C3 3.44772 3.44772 3 4 3H20Z" fill="#1b1b3a"></path> </g></svg>',
+    twitter:
+        '<svg width="24" height="24" fill="#1b1b3a" class="bi bi-twitter-x" viewBox="0 0 24 24" id="Twitter-X--Streamline-Bootstrap" height="24" width="24"><path d="M18.9 1.125h3.681l-8.040000000000001 9.213000000000001L24 22.875h-7.4055l-5.8004999999999995 -7.605 -6.637499999999999 7.605H0.474l8.599499999999999 -9.855L0 1.125h7.5945l5.2425 6.9495000000000005L18.901500000000002 1.125Zm-1.29 19.542h2.04L6.484500000000001 3.2175000000000002H4.2975z" stroke-width="1.5"></path></svg>',
+    tiktok: '<svg width="24" height="24" fill="#1b1b3a" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>tiktok</title> <path d="M16.656 1.029c1.637-0.025 3.262-0.012 4.886-0.025 0.054 2.031 0.878 3.859 2.189 5.213l-0.002-0.002c1.411 1.271 3.247 2.095 5.271 2.235l0.028 0.002v5.036c-1.912-0.048-3.71-0.489-5.331-1.247l0.082 0.034c-0.784-0.377-1.447-0.764-2.077-1.196l0.052 0.034c-0.012 3.649 0.012 7.298-0.025 10.934-0.103 1.853-0.719 3.543-1.707 4.954l0.020-0.031c-1.652 2.366-4.328 3.919-7.371 4.011l-0.014 0c-0.123 0.006-0.268 0.009-0.414 0.009-1.73 0-3.347-0.482-4.725-1.319l0.040 0.023c-2.508-1.509-4.238-4.091-4.558-7.094l-0.004-0.041c-0.025-0.625-0.037-1.25-0.012-1.862 0.49-4.779 4.494-8.476 9.361-8.476 0.547 0 1.083 0.047 1.604 0.136l-0.056-0.008c0.025 1.849-0.050 3.699-0.050 5.548-0.423-0.153-0.911-0.242-1.42-0.242-1.868 0-3.457 1.194-4.045 2.861l-0.009 0.030c-0.133 0.427-0.21 0.918-0.21 1.426 0 0.206 0.013 0.41 0.037 0.61l-0.002-0.024c0.332 2.046 2.086 3.59 4.201 3.59 0.061 0 0.121-0.001 0.181-0.004l-0.009 0c1.463-0.044 2.733-0.831 3.451-1.994l0.010-0.018c0.267-0.372 0.45-0.822 0.511-1.311l0.001-0.014c0.125-2.237 0.075-4.461 0.087-6.698 0.012-5.036-0.012-10.060 0.025-15.083z"></path> </g></svg>',
+    website:
+        '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 15L20 15" stroke="#1b1b3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M4 9L20 9" stroke="#1b1b3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <circle cx="12" cy="12" r="9" stroke="#1b1b3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></circle> <path d="M12.0004 20.8182L11.2862 21.5181C11.4742 21.7101 11.7317 21.8182 12.0004 21.8182C12.2691 21.8182 12.5265 21.7101 12.7146 21.5181L12.0004 20.8182ZM12.0004 3.18188L12.7146 2.48198C12.5265 2.29005 12.2691 2.18188 12.0004 2.18188C11.7317 2.18188 11.4742 2.29005 11.2861 2.48198L12.0004 3.18188ZM14.6004 12.0001C14.6004 15.1611 13.3373 18.0251 11.2862 20.1183L12.7146 21.5181C15.1173 19.0662 16.6004 15.7053 16.6004 12.0001H14.6004ZM11.2861 3.88178C13.3373 5.97501 14.6004 8.83903 14.6004 12.0001H16.6004C16.6004 8.29478 15.1173 4.93389 12.7146 2.48198L11.2861 3.88178ZM9.40039 12.0001C9.40039 8.83903 10.6634 5.97501 12.7146 3.88178L11.2861 2.48198C8.88347 4.93389 7.40039 8.29478 7.40039 12.0001H9.40039ZM12.7146 20.1183C10.6634 18.0251 9.40039 15.1611 9.40039 12.0001H7.40039C7.40039 15.7053 8.88348 19.0662 11.2862 21.5181L12.7146 20.1183Z" fill="#1b1b3a"></path> </g></svg>',
+};
+
+const getSocialIcon = (platform: string) => {
+    const key = platform.toLowerCase() as keyof typeof socialIcons;
+    return socialIcons[key] || socialIcons.website;
+};
+
+const splitEmail = contact.email ? contact.email.split('@') : [];
+---
+
+<div class="details-card">
+    <!-- Biography -->
+    <details-card-section class="details-card-section">
+        <h1 class="details-card-section-title">Semblanza</h1>
+        <p class="biography">{biography}</p>
+    </details-card-section>
+
+    <div class="divider"></div>
+
+    <!-- Services  -->
+    <details-card-section class="details-card-section">
+        <h1 class="details-card-section-title">Servicios</h1>
+        <ServicesList services={services} />
+    </details-card-section>
+
+    <div class="divider"></div>
+
+    <details-card-section class="details-card-section extra-padding">
+        <h2 class="details-card-section-title">Contacto</h2>
+
+        <div class="details-card-two-columns">
+            <!-- Contact Information details-card-section -->
+            <div class="column">
+                <div class="contact-info">
+                    {
+                        contact.phoneNumber && (
+                            <div class="contact-item">
+                                <span class="contact-icon">
+                                    <Fragment set:html={socialIcons.phone} />
+                                </span>
+                                <a
+                                    href={`tel:${contact.phoneNumber.replace(
+                                        /\D/g,
+                                        ''
+                                    )}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="contact-link"
+                                    aria-label={`Llamar a ${contact.phoneNumber}`}
+                                    data-umami-event="pdp_contact_click"
+                                    data-umami-event-contact-type="phone"
+                                    data-umami-event-profile={`${profileName}:phone`}
+                                >
+                                    {contact.phoneNumber}
+                                </a>
+                            </div>
+                        )
+                    }
+                    {
+                        contact.email && (
+                            <div class="contact-item">
+                                <span class="contact-icon">
+                                    <Fragment set:html={socialIcons.email} />
+                                </span>
+                                <div
+                                    class="email"
+                                    aria-label={'Correo electrónico'}
+                                >
+                                    <!-- prettier-ignore -->
+                                    {splitEmail.at(0)}<span>@</span>{splitEmail.at(1)}
+                                </div>
+                            </div>
+                        )
+                    }
+                    {
+                        contact.whatsApp && (
+                            <div class="contact-item">
+                                <span class="contact-icon">
+                                    <Fragment set:html={socialIcons.whatsapp} />
+                                </span>
+                                <a
+                                    href={`https://wa.me/${contact.whatsApp.replace(
+                                        '+52',
+                                        '521'
+                                    )}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="contact-link"
+                                    aria-label={`Iniciar conversación por WhatsApp`}
+                                    data-umami-event="pdp_contact_click"
+                                    data-umami-event-contact-type="whatsapp"
+                                    data-umami-event-profile={`${profileName}:whatsApp`}
+                                >
+                                    Contactar por WhatsApp
+                                </a>
+                            </div>
+                        )
+                    }
+                </div>
+            </div>
+
+            <div class="vertical-divider"></div>
+
+            <div class="column">
+                <!-- Social Media details-card-section -->
+                <div class="social-media">
+                    {
+                        socialMedia.map((social) => (
+                            <a
+                                href={social.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="contact-item contact-link"
+                                aria-label={social.name}
+                                data-umami-event="pdp_contact_click"
+                                data-umami-event-contact-type="social_media"
+                                data-umami-event-profile={`${profileName}:${social.name}`}
+                            >
+                                <span class="contact-icon">
+                                    <Fragment
+                                        set:html={getSocialIcon(social.name)}
+                                    />
+                                </span>
+                                <span>{social.handle}</span>
+                            </a>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+    </details-card-section>
+
+    {
+        Boolean(professionalId || academicTitles?.length) && (
+            <div class="divider" />
+        )
+    }
+
+    <!-- Professional ID details-card-section -->
+    {
+        professionalId && (
+            <details-card-section class="details-card-section">
+                <h2 class="details-card-section-title">Formación</h2>
+                <ul class="details-card-professional-info">
+                    {!academicTitles?.length && (
+                        <li>
+                            <b>Cédula Profesional</b>
+                            <br />
+                            {professionalId}
+                        </li>
+                    )}
+                    {academicTitles?.map((academicTitle) => (
+                        <li>
+                            <b>{academicTitle.title}</b>
+                            <br />
+                            {academicTitle.professionalId}
+                        </li>
+                    ))}
+                </ul>
+            </details-card-section>
+        )
+    }
+</div>
+
+<style>
+    .details-card {
+        background: var(--tertiary-light);
+        border-radius: 32px;
+        padding: 48px;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        font-family: 'Red Hat Display', sans-serif;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        overflow: hidden;
+        flex: 1;
+    }
+
+    .details-card-section {
+        margin-bottom: 32px;
+    }
+
+    .details-card-section:last-of-type {
+        margin-bottom: 0;
+    }
+
+    .details-card-section-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--primary-dark);
+        margin: 0 0 16px 0;
+        line-height: 1.2;
+        font-family: 'Gelasio', sans-serif;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .details-card-section-subtitle {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--primary-dark);
+        line-height: 1.3;
+        margin: 0 0 6px 0;
+        font-family: 'Red Hat Display', sans-serif;
+    }
+
+    .details-card-two-columns {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 24px;
+        justify-content: space-between;
+        min-width: 0;
+    }
+
+    .details-card-two-columns > .column {
+        width: 100%;
+        min-width: 0;
+        flex: 1;
+    }
+
+    .vertical-divider {
+        width: 1.5px;
+        background: rgba(183, 181, 228, 0.3);
+        align-self: stretch;
+        flex-shrink: 0;
+    }
+
+    .biography {
+        margin: 0;
+        font-size: 16px;
+        color: var(--primary-dark);
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        max-width: 100%;
+    }
+
+    .contact-info,
+    .social-media {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        min-width: 0;
+    }
+
+    .contact-item {
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+        align-items: center;
+        font-size: 16px;
+        min-width: 0;
+    }
+
+    .contact-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+    }
+
+    .contact-icon :global(svg) {
+        width: 100%;
+        height: 100%;
+    }
+
+    .contact-link {
+        color: #4a5568;
+        text-decoration: none;
+        transition: color 0.2s;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        min-width: 0;
+    }
+
+    .contact-link:hover {
+        color: #2d3748;
+        text-decoration: underline;
+    }
+
+    .divider {
+        width: 100%;
+        height: 2px;
+        background: rgba(183, 181, 228, 0.2);
+        margin: 10px 0 20px 0;
+    }
+
+    .extra-padding {
+        padding-top: 15px;
+    }
+
+    .details-card-professional-info {
+        list-style: none;
+        padding-left: 0;
+        margin-left: 0;
+        color: var(--primary-dark);
+        line-height: 1.3;
+        font-family: 'Red Hat Display', sans-serif;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .details-card-professional-info li {
+        margin-bottom: 15px;
+    }
+
+    div.email > span:nth-child(2) {
+        display: none;
+    }
+
+    @media (max-width: 1120px) {
+        .details-card-two-columns {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+
+    /* Mobile styles */
+    @media (max-width: 640px) {
+        .details-card {
+            padding: 35px;
+        }
+
+        .details-card-section {
+            margin-bottom: 24px;
+        }
+
+        .details-card-section-title {
+            margin-bottom: 12px;
+        }
+
+        .contact-item {
+            gap: 8px;
+        }
+    }
+</style>

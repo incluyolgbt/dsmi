@@ -1,0 +1,164 @@
+.wrapper {
+    position: relative;
+    min-width: 0;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: visible;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 6px;
+    margin: -6px;
+}
+
+.container::-webkit-scrollbar {
+    display: none;
+}
+
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: var(--primary-light);
+    color: var(--primary-dark, #1a1a2e);
+    padding: 13px;
+    border-radius: 40px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Red Hat Display', sans-serif;
+    white-space: nowrap;
+    transition: background 0.15s ease;
+}
+
+.pill:hover {
+    background-color: rgba(167, 139, 250, 0.25);
+}
+
+.label {
+    line-height: 1;
+}
+
+.removeButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(167, 139, 250, 0.25);
+    color: var(--primary-dark, #1a1a2e);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition:
+        background 0.15s ease,
+        transform 0.1s ease;
+    line-height: 1;
+}
+
+.removeButton:hover {
+    background: rgba(167, 139, 250, 0.5);
+}
+
+.removeButton:active {
+    transform: scale(0.9);
+}
+
+@media (max-width: 640px) {
+    .pill {
+        font-size: 13px;
+        padding: 13px;
+    }
+
+    .removeButton {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+.gradientOverlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.gradientLeft {
+    left: -10px;
+    width: 40px;
+    background: linear-gradient(
+        270deg,
+        transparent 0%,
+        var(--bg-primary, white) 80%
+    );
+}
+
+.gradientRight {
+    right: -10px;
+    width: 60px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        var(--bg-primary, white) 80%
+    );
+}
+
+.gradientHidden {
+    opacity: 0;
+}
+
+.scrollArrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    background: rgb(183 181 228 / 15%);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+    color: var(--primary-dark);
+    cursor: pointer;
+    transition:
+        opacity 0.3s ease,
+        background 0.2s ease,
+        transform 0.1s ease;
+    z-index: 2;
+    backdrop-filter: blur(6.1px);
+    touch-action: manipulation;
+}
+
+.scrollArrow:hover {
+    background: rgb(183 181 228 / 40%);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+}
+
+.scrollArrow:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.scrollArrowLeft {
+    left: 10px;
+}
+
+.scrollArrowRight {
+    right: 10px;
+}
+
+.scrollArrowHidden {
+    opacity: 0;
+    pointer-events: none;
+}

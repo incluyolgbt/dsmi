@@ -39,6 +39,7 @@ export default class SupabaseService extends Service {
         const response = await this.algolia.searchSingleIndex({
           indexName: ENV.ALGOLIAINDEX,
           searchParams: mappedQuery,
+          analytics: true,
         });
 
         if (response?.hits) {

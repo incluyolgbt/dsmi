@@ -1,0 +1,344 @@
+---
+interface Props {
+    services: { name: string; price: string }[];
+}
+
+const { services } = Astro.props;
+---
+
+<div class="services-container">
+    <div class="gradient-overlay left" id="left-gradient"></div>
+    <div class="services-grid" id="services-scroll">
+        {
+            services.map((service, index) => (
+                <>
+                    <div class="service-item" data-first={index === 0}>
+                        <div class="details-service-label">{service.name}</div>
+                        <div class="details-service-value">
+                            <span
+                                aria-label={`${service.price} pesos mexicanos`}
+                            >
+                                {service.price} MXN
+                            </span>
+                        </div>
+                    </div>
+                    {index < services.length - 1 && (
+                        <div class="vertical-divider" />
+                    )}
+                </>
+            ))
+        }
+    </div>
+    <div class="gradient-overlay right" id="right-gradient"></div>
+    <button
+        class="scroll-indicator left hidden"
+        id="scroll-left"
+        aria-label="Desplazar a la izquierda"
+        aria-hidden="true"
+    >
+        <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        >
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+    </button>
+    <button
+        class="scroll-indicator right"
+        id="scroll-right"
+        aria-label="Desplazar a la derecha"
+        aria-hidden="false"
+    >
+        <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        >
+            <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+    </button>
+</div>
+
+<script>
+    function initializeServicesScroll() {
+        const scrollContainer = document.getElementById('services-scroll');
+        const scrollLeft = document.getElementById('scroll-left');
+        const scrollRight = document.getElementById('scroll-right');
+        const leftGradient = document.getElementById('left-gradient');
+        const rightGradient = document.getElementById('right-gradient');
+
+        if (
+            !scrollContainer ||
+            !scrollLeft ||
+            !scrollRight ||
+            !leftGradient ||
+            !rightGradient
+        ) {
+            return;
+        }
+
+        const checkScroll = () => {
+            // Read all layout properties first (batched reads)
+            const scrollLeftPos = scrollContainer.scrollLeft;
+            const clientWidth = scrollContainer.clientWidth;
+            const scrollWidth = scrollContainer.scrollWidth;
+
+            // Calculate states
+            const isAtStart = scrollLeftPos <= 10;
+            const isAtEnd = scrollLeftPos + clientWidth >= scrollWidth - 10;
+
+            // Now perform all DOM writes (batched writes)
+            scrollLeft.classList.toggle('hidden', isAtStart);
+            leftGradient.classList.toggle('hidden', isAtStart);
+            scrollRight.classList.toggle('hidden', isAtEnd);
+            rightGradient.classList.toggle('hidden', isAtEnd);
+
+            scrollLeft.setAttribute('tabindex', isAtStart ? '-1' : '0');
+            scrollRight.setAttribute('tabindex', isAtEnd ? '-1' : '0');
+
+            scrollLeft.setAttribute(
+                'aria-hidden',
+                isAtStart ? 'true' : 'false'
+            );
+            scrollRight.setAttribute('aria-hidden', isAtEnd ? 'true' : 'false');
+        };
+
+        const handleScrollLeft = () => {
+            scrollContainer.scrollBy({
+                left: -100,
+                behavior: 'smooth',
+            });
+        };
+
+        const handleScrollRight = () => {
+            scrollContainer.scrollBy({
+                left: 100,
+                behavior: 'smooth',
+            });
+        };
+
+        scrollLeft.addEventListener('click', handleScrollLeft);
+        scrollRight.addEventListener('click', handleScrollRight);
+
+        checkScroll();
+        scrollContainer.addEventListener('scroll', checkScroll);
+        window.addEventListener('resize', checkScroll);
+    }
+
+    document.addEventListener('astro:page-load', initializeServicesScroll);
+</script>
+
+<style>
+    .services-container {
+        position: relative;
+    }
+
+    .services-grid {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        gap: 0;
+        padding: 0;
+        margin: 0;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .services-grid::-webkit-scrollbar {
+        display: none;
+        width: 0;
+        height: 0;
+    }
+
+    .services-grid::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .services-grid::-webkit-scrollbar-thumb {
+        background-color: rgba(183, 181, 228, 0.5);
+        border-radius: 3px;
+    }
+
+    .services-grid::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(183, 181, 228, 0.7);
+    }
+
+    .services-grid > :last-child {
+        padding-right: 60px;
+    }
+
+    .gradient-overlay {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+
+        &.left {
+            z-index: 1;
+            left: -5px;
+            width: 20px;
+            background: linear-gradient(
+                270deg,
+                transparent 0%,
+                var(--tertiary-light) 80%
+            );
+        }
+
+        &.right {
+            right: -5px;
+            width: 60px;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                var(--tertiary-light) 80%
+            );
+        }
+
+        &.hidden {
+            opacity: 0;
+        }
+    }
+
+    .scroll-indicator {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 48px;
+        height: 48px;
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        color: var(--primary-dark);
+        cursor: pointer;
+        transition:
+            opacity 0.3s ease,
+            background 0.2s ease,
+            transform 0.1s ease;
+        z-index: 2;
+        backdrop-filter: blur(6.1px);
+        -webkit-backdrop-filter: blur(6.1px);
+        touch-action: manipulation;
+
+        &.left {
+            left: 10px;
+        }
+
+        &.right {
+            right: 10px;
+        }
+    }
+
+    .scroll-indicator:hover {
+        background: rgba(255, 255, 255, 1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .scroll-indicator:active {
+        transform: translateY(-50%) scale(0.95);
+    }
+
+    .scroll-indicator.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .service-item {
+        flex: 0 0 auto;
+        text-align: left;
+        padding: 16px 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .service-item[data-first='true'] {
+        padding-left: 0;
+    }
+
+    .details-service-label {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--primary-dark);
+        line-height: 1.3;
+        margin: 0 0 6px 0;
+    }
+
+    .details-service-value {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.4;
+        margin: 0;
+        font-family: 'Red Hat Display', sans-serif;
+    }
+
+    .vertical-divider {
+        width: 1.5px;
+        background: rgba(183, 181, 228, 0.3);
+        align-self: stretch;
+        flex-shrink: 0;
+    }
+
+    /* Mobile styles */
+    @media (max-width: 640px) {
+        .service-item {
+            padding: 12px 16px;
+        }
+
+        .service-item[data-first='true'] {
+            padding-left: 0;
+        }
+
+        .details-service-label {
+            font-size: 16px;
+        }
+
+        .details-service-value {
+            font-size: 15px;
+        }
+
+        .gradient-overlay {
+            width: 40px;
+        }
+
+        .scroll-indicator {
+            width: 40px;
+            height: 40px;
+
+            &.left {
+                left: 8px;
+            }
+
+            &.right {
+                right: 8px;
+            }
+        }
+
+        .scroll-indicator:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .scroll-indicator svg {
+            width: 20px;
+            height: 20px;
+        }
+    }
+</style>

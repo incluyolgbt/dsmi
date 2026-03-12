@@ -1,0 +1,23 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+    const profiles = await getCollection('profiles');
+
+    return [
+        ...profiles.map((item) => ({
+            params: { id: item.data.id },
+        })),
+    ];
+}
+
+const { id } = Astro.params;
+
+const profileById = await getEntry('profiles', id);
+
+if (!profileById?.data) {
+    return Astro.redirect(`/404`);
+} else {
+    return Astro.redirect(`/perfil/${profileById.data.slug}`);
+}
+---

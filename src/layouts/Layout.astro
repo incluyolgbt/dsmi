@@ -2,6 +2,7 @@
 import { ClientRouter } from "astro:transitions";
 import Footer from "../components/footer/FooterV2.astro";
 import Header from "../components/header/Header.astro";
+import SpeedInsights from "@vercel/speed-insights/astro";
 ---
 
 <!doctype html>
@@ -53,6 +54,7 @@ import Header from "../components/header/Header.astro";
       <slot />
     </main>
     <Footer />
+    <SpeedInsights />
   </body><!-- Global Styles -->
   <style is:global>
     :root {

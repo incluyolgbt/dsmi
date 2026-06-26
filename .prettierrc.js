@@ -1,11 +1,12 @@
-'use strict';
-
-module.exports = {
+// .prettierrc.mjs
+/** @type {import("prettier").Config} */
+export default {
+  plugins: ["prettier-plugin-astro"],
   overrides: [
     {
-      files: '*.{js,ts}',
+      files: "*.astro",
       options: {
-        singleQuote: true,
+        parser: "astro",
       },
     },
   ],

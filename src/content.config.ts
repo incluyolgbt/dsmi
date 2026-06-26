@@ -4,23 +4,9 @@ import type { MentalHealthEntity } from './content.types';
 
 // Create a single Supabase client for interacting with your database
 const supabase = createClient(
-    'https://tkmrpojsltxhllgkqhpa.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRrbXJwb2pzbHR4aGxsZ2txaHBhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDI1NzM2NjksImV4cCI6MjAxODE0OTY2OX0.O_gqfDEoRRvKqtgJuBdPlHcoYNJa0_maRamlPOrfAHo'
+    import.meta.env.SUPABASE_URL,
+    import.meta.env.SUPABASE_TOKEN
 );
-
-const mentalHealthEntities = defineCollection({
-    loader: async () => {
-        let { data, error } = await supabase
-            .from('mental-health-entities')
-            .select('*');
-
-        if (!data && error) {
-            throw error;
-        }
-
-        return data as Array<MentalHealthEntity>;
-    },
-});
 
 const locations = defineCollection({
     loader: async () => {

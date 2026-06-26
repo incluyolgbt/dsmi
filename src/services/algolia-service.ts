@@ -1,7 +1,10 @@
 import { searchClient } from '@algolia/client-search';
 
-const client = searchClient('VRJP9BQPHG', '5440a5d520b3094bfb7bba8ed9515df5');
-const INDEX_NAME = 'dsmi-prod';
+const client = searchClient(
+    import.meta.env.PUBLIC_ALGOLIA_APP_ID,
+    import.meta.env.PUBLIC_ALGOLIA_API_KEY
+);
+const INDEX_NAME = import.meta.env.ALGOLIA_INDEX;
 
 export const getProfiles = async ({
     query = '',

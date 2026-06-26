@@ -13,6 +13,7 @@
         "@astrojs/cloudflare": "^12.6.12",
         "@astrojs/react": "^4.4.2",
         "@astrojs/sitemap": "^3.7.3",
+        "@supabase/supabase-js": "^2.108.2",
         "@types/react": "^19.2.14",
         "@types/react-dom": "^19.2.3",
         "astro": "^5.11.0",

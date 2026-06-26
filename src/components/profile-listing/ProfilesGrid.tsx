@@ -14,9 +14,12 @@ import {
 import { updateProfilesStructuredData } from './profilesStructuredData';
 import { createUmamiEvent, sendUmamiEvent } from '../../utils/analytics';
 
-const client = searchClient('VRJP9BQPHG', '5440a5d520b3094bfb7bba8ed9515df5');
+const client = searchClient(
+    import.meta.env.PUBLIC_ALGOLIA_APP_ID,
+    import.meta.env.PUBLIC_ALGOLIA_API_KEY
+);
 
-const INDEX_NAME = 'dsmi-prod';
+const INDEX_NAME = import.meta.env.PUBLIC_ALGOLIA_INDEX;
 const FACET_PARAM_PREFIX = 'f_';
 const PRICE_RANGE_PARAM = `${FACET_PARAM_PREFIX}price`;
 const QUERY_PARAM = 'q';

@@ -1,93 +1,96 @@
 ---
 // pages/perfiles/index.astro
-import Layout from '../../layouts/Layout.astro';
-import ProfilesGrid from '../../components/profile-listing/ProfilesGrid.tsx';
-import ProfilesSeo from '../../components/profile-listing/ProfilesSeo.astro';
-import { buildPriceNumericFilters } from '../../components/profile-listing/priceRangeOptions';
+import Layout from "../../layouts/Layout.astro";
+import ProfilesGrid from "../../components/profile-listing/ProfilesGrid.tsx";
+import ProfilesSeo from "../../components/profile-listing/ProfilesSeo.astro";
+import { buildPriceNumericFilters } from "../../components/profile-listing/priceRangeOptions";
 
-import { searchClient } from '@algolia/client-search';
+import { searchClient } from "@algolia/client-search";
 
 export const prerender = false;
 
-const client = searchClient('VRJP9BQPHG', '5440a5d520b3094bfb7bba8ed9515df5');
-const INDEX_NAME = 'dsmi-prod';
-const FACET_PARAM_PREFIX = 'f_';
-const FACETS = ['entityType', 'city', 'modalities', 'focusAreas'];
+const client = searchClient(
+  import.meta.env.PUBLIC_ALGOLIA_APP_ID,
+  import.meta.env.PUBLIC_ALGOLIA_API_KEY,
+);
+const INDEX_NAME = import.meta.env.PUBLIC_ALGOLIA_INDEX;
+const FACET_PARAM_PREFIX = "f_";
+const FACETS = ["entityType", "city", "modalities", "focusAreas"];
 const HITS_PER_PAGE = 8;
 const requestedPage = Number.parseInt(
-    Astro.url.searchParams.get('page') ?? '1',
-    10
+  Astro.url.searchParams.get("page") ?? "1",
+  10,
 );
 const initialPage =
-    Number.isNaN(requestedPage) || requestedPage < 1 ? 1 : requestedPage;
-const initialQuery = Astro.url.searchParams.get('q') ?? '';
+  Number.isNaN(requestedPage) || requestedPage < 1 ? 1 : requestedPage;
+const initialQuery = Astro.url.searchParams.get("q") ?? "";
 const selectedPriceRanges = Astro.url.searchParams
-    .getAll(`${FACET_PARAM_PREFIX}price`)
-    .flatMap((value) => value.split(','))
-    .map((value) => value.trim())
-    .filter(Boolean);
+  .getAll(`${FACET_PARAM_PREFIX}price`)
+  .flatMap((value) => value.split(","))
+  .map((value) => value.trim())
+  .filter(Boolean);
 const facetFilters = FACETS.map((facetName) =>
-    Astro.url.searchParams
-        .getAll(`${FACET_PARAM_PREFIX}${facetName}`)
-        .flatMap((value) => value.split(','))
-        .map((value) => value.trim())
-        .filter(Boolean)
-        .map((value) => `${facetName}:${value}`)
+  Astro.url.searchParams
+    .getAll(`${FACET_PARAM_PREFIX}${facetName}`)
+    .flatMap((value) => value.split(","))
+    .map((value) => value.trim())
+    .filter(Boolean)
+    .map((value) => `${facetName}:${value}`),
 ).filter((values) => values.length > 0);
 const currentUrl = new URL(
-    `${Astro.url.pathname}${Astro.url.search}`,
-    'https://saludmental.lgbt'
+  `${Astro.url.pathname}${Astro.url.search}`,
+  "https://saludmental.lgbt",
 ).toString();
 
 const { results } = await client.search({
-    requests: [
-        {
-            indexName: INDEX_NAME,
-            query: initialQuery,
-            facets: FACETS,
-            numericFilters: buildPriceNumericFilters(selectedPriceRanges),
-            facetFilters,
-            hitsPerPage: HITS_PER_PAGE,
-            page: initialPage - 1,
-        },
-    ],
+  requests: [
+    {
+      indexName: INDEX_NAME,
+      query: initialQuery,
+      facets: FACETS,
+      numericFilters: buildPriceNumericFilters(selectedPriceRanges),
+      facetFilters,
+      hitsPerPage: HITS_PER_PAGE,
+      page: initialPage - 1,
+    },
+  ],
 });
 
 const firstResult = results[0];
-const ssrResult = 'hits' in firstResult ? firstResult : null;
+const ssrResult = "hits" in firstResult ? firstResult : null;
 ---
 
 <title>Perfiles - Directorio de Salud Mental LGBTQ+</title>
 <meta
-    name="description"
-    content={`Encuentra profesionistas de la salud mental con perspectiva de diversidad sexual y de género en el Directorio de Salud Mental LGBTQ+.`}
+  name="description"
+  content={`Encuentra profesionistas de la salud mental con perspectiva de diversidad sexual y de género en el Directorio de Salud Mental LGBTQ+.`}
 />
 <link rel="canonical" href={`https://saludmental.lgbt/perfiles/`} />
 <meta name="robots" content="index, follow" />
 
 <meta
-    property="og:title"
-    content={'Perfiles - Directorio de Salud Mental LGBTQ+'}
+  property="og:title"
+  content={"Perfiles - Directorio de Salud Mental LGBTQ+"}
 />
 <meta
-    property="og:description"
-    content={`Encuentra profesionistas de la salud mental con perspectiva de diversidad sexual y de género en el Directorio de Salud Mental LGBTQ+.`}
+  property="og:description"
+  content={`Encuentra profesionistas de la salud mental con perspectiva de diversidad sexual y de género en el Directorio de Salud Mental LGBTQ+.`}
 />
 
 <Layout>
-    <ProfilesSeo
-        profiles={ssrResult?.hits ?? []}
-        page={initialPage}
-        hitsPerPage={HITS_PER_PAGE}
-        url={currentUrl}
-    />
-    <ProfilesGrid
-        client:load
-        initialHits={ssrResult?.hits ?? []}
-        initialPage={initialPage}
-        initialTotalPages={ssrResult?.nbPages ?? 1}
-        initialFacets={{
-            ...(ssrResult?.facets ?? {}),
-        }}
-    />
+  <ProfilesSeo
+    profiles={ssrResult?.hits ?? []}
+    page={initialPage}
+    hitsPerPage={HITS_PER_PAGE}
+    url={currentUrl}
+  />
+  <ProfilesGrid
+    client:load
+    initialHits={ssrResult?.hits ?? []}
+    initialPage={initialPage}
+    initialTotalPages={ssrResult?.nbPages ?? 1}
+    initialFacets={{
+      ...(ssrResult?.facets ?? {}),
+    }}
+  />
 </Layout>

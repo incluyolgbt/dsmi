@@ -96,6 +96,7 @@ export default defineConfig({
   redirects: {
     "/quienes-somos": "/preguntas-frecuentes/",
     "/directorio": "/perfiles/",
+    "/TERMINOS_Y_CONDICIONES.pdf": "/legal/terminos-y-condiciones/",
     ...legacyProfileRedirects,
   },
 });

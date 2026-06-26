@@ -1,178 +1,167 @@
 ---
 const linkColumns = [
-    {
-        title: 'Directorio',
-        links: [
-            {
-                label: 'Suma tu perfil',
-                href: '/preguntas-frecuentes#:~:text=Informaci%C3%B3n%20para%20profesionistas,incluyo.lgbt.',
-                openInNewTab: false,
-            },
-            {
-                label: 'Reportar un perfil',
-                href: '/preguntas-frecuentes#:~:text=Si%20experimentaste%20un%20mal%20trato%20o%20deseas%20reportar%20alguno%20de%20los%20perfiles%20que%20aparecen%20en%20este%20directorio%2C%20por%20favor%2C%20escr%C3%ADbenos%20al%20correo%20reportes%2Ddsmi%40incluyo.lgbt.',
-                openInNewTab: false,
-            },
-        ],
-    },
-    {
-        title: 'Soporte',
-        links: [
-            {
-                label: 'Preguntas Frecuentes',
-                href: '/preguntas-frecuentes',
-                openInNewTab: false,
-            },
-            {
-                label: 'Términos y Condiciones',
-                href: '/TERMINOS_Y_CONDICIONES.pdf',
-                openInNewTab: true,
-            },
-        ],
-    },
-    {
-        title: 'Incluyo',
-        links: [
-            {
-                label: 'Acerca de Incluyo',
-                href: 'https://incluyo.lgbt/conocenos/',
-                openInNewTab: true,
-            },
-            {
-                label: 'Contacto',
-                href: 'https://incluyo.lgbt/contacto/',
-                openInNewTab: true,
-            },
-        ],
-    },
+  {
+    title: "Directorio",
+    links: [
+      {
+        label: "Suma tu perfil",
+        href: "/preguntas-frecuentes#:~:text=Informaci%C3%B3n%20para%20profesionistas,incluyo.lgbt.",
+        openInNewTab: false,
+      },
+      {
+        label: "Reportar un perfil",
+        href: "/preguntas-frecuentes#:~:text=Si%20experimentaste%20un%20mal%20trato%20o%20deseas%20reportar%20alguno%20de%20los%20perfiles%20que%20aparecen%20en%20este%20directorio%2C%20por%20favor%2C%20escr%C3%ADbenos%20al%20correo%20reportes%2Ddsmi%40incluyo.lgbt.",
+        openInNewTab: false,
+      },
+    ],
+  },
+  {
+    title: "Soporte",
+    links: [
+      {
+        label: "Preguntas Frecuentes",
+        href: "/preguntas-frecuentes",
+        openInNewTab: false,
+      },
+      {
+        label: "Términos y Condiciones",
+        // href: '/TERMINOS_Y_CONDICIONES.pdf',
+        href: "/legal/terminos-y-condiciones",
+        openInNewTab: false,
+      },
+    ],
+  },
+  {
+    title: "Incluyo",
+    links: [
+      {
+        label: "Acerca de Incluyo",
+        href: "https://incluyo.lgbt/conocenos/",
+        openInNewTab: true,
+      },
+      {
+        label: "Contacto",
+        href: "https://incluyo.lgbt/contacto/",
+        openInNewTab: true,
+      },
+    ],
+  },
 ];
 ---
 
 <footer class="site-footer-v2">
-    <div class="footer-inner">
-        <nav
-            class="footer-link-columns"
-            aria-label="Navegación del pie de página"
-        >
-            {
-                linkColumns.map((column) => (
-                    <section
-                        class="footer-column"
-                        aria-labelledby={`footer-${column.title}`}
-                    >
-                        <h2 id={`footer-${column.title}`}>{column.title}</h2>
-                        <ul>
-                            {column.links.map((link) => (
-                                <li>
-                                    <a
-                                        href={link.href}
-                                        target={
-                                            link.openInNewTab
-                                                ? '_blank'
-                                                : '_self'
-                                        }
-                                        rel={
-                                            link.openInNewTab
-                                                ? 'noopener noreferrer'
-                                                : ''
-                                        }
-                                    >
-                                        {link.label}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    </section>
-                ))
-            }
-        </nav>
-    </div>
+  <div class="footer-inner">
+    <nav class="footer-link-columns" aria-label="Navegación del pie de página">
+      {
+        linkColumns.map((column) => (
+          <section
+            class="footer-column"
+            aria-labelledby={`footer-${column.title}`}
+          >
+            <h2 id={`footer-${column.title}`}>{column.title}</h2>
+            <ul>
+              {column.links.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    target={link.openInNewTab ? "_blank" : "_self"}
+                    rel={link.openInNewTab ? "noopener noreferrer" : ""}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </nav>
+  </div>
 </footer>
 
 <style>
+  .site-footer-v2 {
+    flex-shrink: 0;
+    width: 100%;
+    margin-top: auto;
+    padding: clamp(2rem, 4vw, 3rem) 0 max(1.25rem, env(safe-area-inset-bottom));
+    background: var(--primary-dark);
+    color: var(--light-primary-text);
+    font-family: "Red Hat Display", sans-serif;
+  }
+
+  .footer-inner {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding-right: max(1.5rem, env(safe-area-inset-right));
+    padding-left: max(1.5rem, env(safe-area-inset-left));
+  }
+
+  .footer-link-columns {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.5rem, 4vw, 4rem);
+    padding: clamp(2rem, 4vw, 3rem) 0;
+  }
+
+  .footer-column h2 {
+    margin: 0 0 1rem;
+    color: var(--primary-light);
+    font-size: 0.84rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .footer-column ul {
+    display: grid;
+    gap: 0.72rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .footer-column a {
+    color: var(--light-text-secondary);
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.35;
+    text-decoration: none;
+    transition:
+      color 0.2s ease,
+      text-decoration-color 0.2s ease;
+  }
+
+  .footer-column a:hover,
+  .footer-column a:focus-visible {
+    color: #ffffff;
+    text-decoration: underline;
+    text-decoration-color: var(--primary-light);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.3em;
+  }
+
+  .footer-column a:focus-visible {
+    outline: 3px solid var(--primary-light);
+    outline-offset: 5px;
+  }
+
+  @media (max-width: 760px) {
     .site-footer-v2 {
-        flex-shrink: 0;
-        width: 100%;
-        margin-top: auto;
-        padding: clamp(2rem, 4vw, 3rem) 0
-            max(1.25rem, env(safe-area-inset-bottom));
-        background: var(--primary-dark);
-        color: var(--light-primary-text);
-        font-family: 'Red Hat Display', sans-serif;
+      padding-top: 3rem;
     }
 
     .footer-inner {
-        width: 100%;
-        max-width: 960px;
-        margin: 0 auto;
-        padding-right: max(1.5rem, env(safe-area-inset-right));
-        padding-left: max(1.5rem, env(safe-area-inset-left));
+      padding-right: max(1rem, env(safe-area-inset-right));
+      padding-left: max(1rem, env(safe-area-inset-left));
     }
 
     .footer-link-columns {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: clamp(1.5rem, 4vw, 4rem);
-        padding: clamp(2rem, 4vw, 3rem) 0;
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+      padding: 2rem 0;
     }
-
-    .footer-column h2 {
-        margin: 0 0 1rem;
-        color: var(--primary-light);
-        font-size: 0.84rem;
-        font-weight: 900;
-        letter-spacing: 0.08em;
-        line-height: 1.2;
-        text-transform: uppercase;
-    }
-
-    .footer-column ul {
-        display: grid;
-        gap: 0.72rem;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-    }
-
-    .footer-column a {
-        color: var(--light-text-secondary);
-        font-size: 1rem;
-        font-weight: 700;
-        line-height: 1.35;
-        text-decoration: none;
-        transition:
-            color 0.2s ease,
-            text-decoration-color 0.2s ease;
-    }
-
-    .footer-column a:hover,
-    .footer-column a:focus-visible {
-        color: #ffffff;
-        text-decoration: underline;
-        text-decoration-color: var(--primary-light);
-        text-decoration-thickness: 2px;
-        text-underline-offset: 0.3em;
-    }
-
-    .footer-column a:focus-visible {
-        outline: 3px solid var(--primary-light);
-        outline-offset: 5px;
-    }
-
-    @media (max-width: 760px) {
-        .site-footer-v2 {
-            padding-top: 3rem;
-        }
-
-        .footer-inner {
-            padding-right: max(1rem, env(safe-area-inset-right));
-            padding-left: max(1rem, env(safe-area-inset-left));
-        }
-
-        .footer-link-columns {
-            grid-template-columns: 1fr;
-            gap: 1.75rem;
-            padding: 2rem 0;
-        }
-    }
+  }
 </style>

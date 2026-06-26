@@ -1,57 +1,52 @@
-# Directorio de Salud Mental Incluyo (DSMI)
+# Astro Starter Kit: Basics
 
-El Directorio de Salud Mental Incluyo es una aplicación web que busca ayudar a personas LGBTQ+ a encontrar profesionistas de salud mental con perspectiva de género y diversidad sexual.
+```sh
+npm create astro@latest -- --template basics
+```
 
-## Prerequisites
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
+[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
 
-You will need the following things properly installed on your computer.
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
-- [Git](https://git-scm.com/)
-- [Node.js](https://nodejs.org/) (with npm)
-- [Ember CLI](https://cli.emberjs.com/release/)
-- [Google Chrome](https://google.com/chrome/)
+![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
 
-## Installation
+## 🚀 Project Structure
 
-- `git clone` this repository
-- `cd dsmi`
-- `npm install`
+Inside of your Astro project, you'll see the following folders and files:
 
-After installation is complete, request a copy of the enviroment variables and plug them into the `config/environment.js` file.
+```text
+/
+├── public/
+│   └── favicon.svg
+├── src
+│   ├── assets
+│   │   └── astro.svg
+│   ├── components
+│   │   └── Welcome.astro
+│   ├── layouts
+│   │   └── Layout.astro
+│   └── pages
+│       └── index.astro
+└── package.json
+```
 
-## Running / Development
+To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
 
-- `ember serve`
-- Visit your app at [http://localhost:4200](http://localhost:4200).
-- Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
+## 🧞 Commands
 
-### Code Generators
+All commands are run from the root of the project, from a terminal:
 
-Make use of the many generators for code, try `ember help generate` for more details
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-### Running Tests
+## 👀 Want to learn more?
 
-- `ember test`
-- `ember test --server`
-
-### Linting
-
-- `npm run lint`
-- `npm run lint:fix`
-
-### Building
-
-- `ember build` (development)
-- `ember build --environment production` (production)
-
-### Deploying
-
-- Netlify
-
-## Further Reading / Useful Links
-
-- [ember.js](https://emberjs.com/)
-- [ember-cli](https://cli.emberjs.com/release/)
-- Development Browser Extensions
-  - [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  - [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).

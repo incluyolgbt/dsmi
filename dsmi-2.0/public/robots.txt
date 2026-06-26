@@ -1,5 +1,0 @@
-User-Agent: *
-Allow: /*
-Disallow: /perfil/id/*
-
-Sitemap: https://saludmental.lgbt/sitemap-index.xml

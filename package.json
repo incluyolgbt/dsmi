@@ -1,29 +1,33 @@
 {
-    "name": "dsmi-2-0",
-    "type": "module",
-    "version": "0.0.1",
-    "scripts": {
-        "dev": "astro dev",
-        "build": "astro build",
-        "preview": "astro preview",
-        "astro": "astro"
-    },
-    "dependencies": {
-        "@algolia/client-search": "^5.49.0",
-        "@astrojs/react": "^4.4.2",
-        "@astrojs/sitemap": "^3.7.3",
-        "@astrojs/vercel": "^11.0.0",
-        "@supabase/supabase-js": "^2.108.2",
-        "@types/react": "^19.2.14",
-        "@types/react-dom": "^19.2.3",
-        "@vercel/speed-insights": "^2.0.0",
-        "astro": "^7.0.3",
-        "react": "^19.2.4",
-        "react-dom": "^19.2.4"
-    },
-    "devDependencies": {
-        "prettier": "^3.8.5",
-        "prettier-plugin-astro": "^0.14.1"
-    },
-    "packageManager": "yarn@1.22.22"
+  "name": "dsmi-2-0",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "yarn run build && wrangler dev",
+    "astro": "astro",
+    "generate-types": "wrangler types",
+    "deploy": "yarn run build && wrangler deploy"
+  },
+  "dependencies": {
+    "@algolia/client-search": "^5.49.0",
+    "@astrojs/cloudflare": "^14.0.1",
+    "@astrojs/react": "^4.4.2",
+    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/vercel": "^11.0.0",
+    "@supabase/supabase-js": "^2.108.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vercel/speed-insights": "^2.0.0",
+    "astro": "^7.0.3",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "prettier": "^3.8.5",
+    "prettier-plugin-astro": "^0.14.1",
+    "wrangler": "^4.105.0"
+  },
+  "packageManager": "yarn@1.22.22"
 }

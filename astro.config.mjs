@@ -5,6 +5,8 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import react from "@astrojs/react";
 
+import cloudflare from "@astrojs/cloudflare";
+
 const legacyProfileRedirects = {
   "/perfil/029bf91f-e58f-4873-b6ee-b926321d72cc":
     "/perfil/david-garcia-acosta/",
@@ -85,7 +87,7 @@ const legacyProfileRedirects = {
 
 export default defineConfig({
   // adapter: cloudflare(),
-  adapter: vercel(),
+  adapter: cloudflare(),
   integrations: [
     react(),
     sitemap({

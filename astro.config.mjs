@@ -97,6 +97,7 @@ export default defineConfig({
     "/quienes-somos": "/preguntas-frecuentes/",
     "/directorio": "/perfiles/",
     "/TERMINOS_Y_CONDICIONES.pdf": "/legal/terminos-y-condiciones/",
+    "/sumate": "https://v2-dsmi-a.saludmental.lgbt/q/sumate",
     ...legacyProfileRedirects,
   },
 });

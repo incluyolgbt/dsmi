@@ -1,9 +1,9 @@
 function loadScript() {
   const scriptElement = document.createElement('script');
-  const FILE_URL = 'https://master--earnest-druid-86c01b.netlify.app/script.js';
+  const FILE_URL = 'https://v2-dsmi-a.netlify.app/script.js';
   scriptElement.setAttribute('src', FILE_URL);
   scriptElement.setAttribute('type', 'text/javascript');
-  scriptElement.setAttribute('async', true);
+  scriptElement.setAttribute('defer', true);
 
   if (
     window.location.href.indexOf('develop') === -1 &&

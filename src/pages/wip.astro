@@ -1,0 +1,46 @@
+---
+
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>Redirigiendo...</title>
+    <script
+      defer
+      src="https://v2-dsmi-a.saludmental.lgbt/script.js"
+      data-website-id="f3257efc-2124-49a1-84b6-d2e63d3ce890"
+      data-performance="true"></script>
+  </head>
+  <body>
+    <script>
+      const IP_QUERY_PARAM = "ip";
+      const FALLBACK_IP = "unavailable";
+
+      const redirectWithIp = (ip) => {
+        const url = new URL(window.location.href);
+
+        url.searchParams.set(IP_QUERY_PARAM, ip);
+        window.location.replace(url.toString());
+      };
+
+      const hasIpParam = new URLSearchParams(window.location.search).has(
+        IP_QUERY_PARAM,
+      );
+
+      if (!hasIpParam) {
+        fetch("https://api.ipify.org?format=json")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Unable to resolve public IP");
+            }
+
+            return response.json();
+          })
+          .then(({ ip }) => redirectWithIp(ip || FALLBACK_IP))
+          .catch(() => redirectWithIp(FALLBACK_IP));
+      }
+    </script>
+  </body>
+</html>
